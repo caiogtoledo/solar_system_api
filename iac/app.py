@@ -34,10 +34,10 @@ else:
     stage = 'TEST'
 
 tags = {
-    'project': 'Template',
+    'project': 'solar_system_api',
     'stage': stage,
     'stack': 'BACK',
-    'owner': 'DevCommunity'
+    'owner': 'caiogtoledo'
 }
 
 TemplateStack(app, stack_name=stack_name, env=cdk.Environment(account=aws_account_id, region=aws_region), tags=tags)
