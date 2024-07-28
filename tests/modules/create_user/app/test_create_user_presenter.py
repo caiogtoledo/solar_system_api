@@ -1,6 +1,6 @@
 import json
 
-from src.modules.create_user.app.create_user_presenter import lambda_handler
+from src.modules.measure_battery.app.measure_battery_presenter import lambda_handler
 
 
 class Test_CreateUserPresenter:

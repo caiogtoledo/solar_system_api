@@ -1,4 +1,4 @@
-from src.modules.create_user.app.create_user_viewmodel import CreateUserViewmodel
+from src.modules.measure_battery.app.measure_battery_viewmodel import CreateUserViewmodel
 from src.shared.domain.entities.user import User
 from src.shared.domain.enums.state_enum import STATE
 

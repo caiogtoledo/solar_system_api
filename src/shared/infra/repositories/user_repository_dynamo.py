@@ -2,7 +2,7 @@ from decimal import Decimal
 from typing import List
 
 from src.shared.domain.entities.user import User
-from src.shared.domain.repositories.user_repository_interface import IUserRepository
+from src.shared.domain.repositories.battery_repository_interface import IUserRepository
 from src.shared.environments import Environments
 from src.shared.helpers.errors.usecase_errors import NoItemsFound
 from src.shared.infra.dto.user_dynamo_dto import UserDynamoDTO

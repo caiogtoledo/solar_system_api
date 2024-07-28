@@ -1,35 +1,32 @@
 from abc import ABC, abstractmethod
 from typing import List
 
-from src.shared.domain.entities.user import User
+from src.shared.domain.entities.battery import Battery
 
 
-class IUserRepository(ABC):
+class IBatteryRepository(ABC):
 
     @abstractmethod
-    def get_user(self, user_id: int) -> User:
+    def create_measure(self, measure: Battery) -> None:
+        pass
+
+    @abstractmethod
+    def get_all_user(self) -> List[Battery]:
+        pass
+
+    @abstractmethod
+    def create_user(self, new_user: Battery) -> Battery:
+        pass
+
+    @abstractmethod
+    def delete_user(self, user_id: int) -> Battery:
         """
         If user not found raise NoItemsFound
         """
         pass
 
     @abstractmethod
-    def get_all_user(self) -> List[User]:
-        pass
-
-    @abstractmethod
-    def create_user(self, new_user: User) -> User:
-        pass
-
-    @abstractmethod
-    def delete_user(self, user_id: int) -> User:
-        """
-        If user not found raise NoItemsFound
-        """
-        pass
-
-    @abstractmethod
-    def update_user(self, user_id: int, new_name: str) -> User:
+    def update_user(self, user_id: int, new_name: str) -> Battery:
         """
         If user not found raise NoItemsFound
         """
