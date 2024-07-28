@@ -11,30 +11,5 @@ class IBatteryRepository(ABC):
         pass
 
     @abstractmethod
-    def get_all_user(self) -> List[Battery]:
-        pass
-
-    @abstractmethod
-    def create_user(self, new_user: Battery) -> Battery:
-        pass
-
-    @abstractmethod
-    def delete_user(self, user_id: int) -> Battery:
-        """
-        If user not found raise NoItemsFound
-        """
-        pass
-
-    @abstractmethod
-    def update_user(self, user_id: int, new_name: str) -> Battery:
-        """
-        If user not found raise NoItemsFound
-        """
-        pass
-
-    @abstractmethod
-    def get_user_counter(self) -> int:
-        """
-        Returns the number of all users that have ever been created
-        """
+    def get_all_battery_measurements(self) -> List[Battery]:
         pass
