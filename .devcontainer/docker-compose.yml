@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ../..:/workspaces:cached
+    command: sleep infinity
+
+  db:
+    image: mongo:latest
+    restart: unless-stopped
+    ports:
+      - "27020:27017" # Mapeamento de portas para o host na porta 27017
+    volumes:
+      - mongodb-pierx-api-data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME:
+      MONGO_INITDB_ROOT_PASSWORD:
+      MONGO_INITDB_DATABASE: pierx-importer-api-local
+
+volumes:
+  mongodb-pierx-api-data: # Corrigido para corresponder ao volume usado
