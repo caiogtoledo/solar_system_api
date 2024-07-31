@@ -1,6 +1,5 @@
 from src.modules.measure_battery.app.measure_battery_viewmodel import CreateUserViewmodel, MeasureBatteryViewmodel
 from src.shared.domain.entities.battery import Battery
-from src.shared.domain.enums.state_enum import STATE
 
 
 class Test_MeasureBatteryViewModel:

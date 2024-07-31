@@ -14,6 +14,7 @@ class MeasureBatteryViewmodel:
         self.soc = battery.soc
         self.voltage = battery.voltage
         self.current = battery.current
+        self.temperature = battery.temperature
 
     def to_dict(self):
         return {
