@@ -1,4 +1,4 @@
-from src.modules.measure_battery.app.measure_battery_viewmodel import CreateUserViewmodel, MeasureBatteryViewmodel
+from src.modules.measure_battery.app.measure_battery_viewmodel import MeasureBatteryViewmodel
 from src.shared.domain.entities.battery import Battery
 
 
