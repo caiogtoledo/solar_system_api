@@ -89,3 +89,4 @@ class Test_Battery:
                 current=0.1,
                 temperature="TESTE",
             )
+# TODO: Implementar teste para o MIN e MAX do Soc
