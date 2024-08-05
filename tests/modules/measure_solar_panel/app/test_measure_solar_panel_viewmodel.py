@@ -1,26 +1,28 @@
-from src.modules.measure_battery.app.measure_battery_viewmodel import MeasureBatteryViewmodel
-from src.shared.domain.entities.battery import Battery
+
+import datetime
+from src.modules.measure_solar_panel.app.measure_solar_panel_viewmodel import MeasureSolarPanelViewmodel
+from src.shared.domain.entities.solar_panel import SolarPanel
 
 
-class Test_MeasureBatteryViewModel:
+class Test_MeasureSolarPanelViewModel:
 
-    def test_measure_battery_viewmodel(self):
-        battery_measurement = Battery(
-            battery_id="1",
-            soc=0.5,
-            voltage=3.7,
-            current=0.1,
-            temperature=25.0,
+    def test_measure_solar_panel_viewmodel(self):
+        solar_panel_measurement = SolarPanel(
+            solar_panel_id="1",
+            instantly=0.5,
+            daily=3.7,
+            monthly=317.3,
+            timestamp=int(datetime.datetime.now().timestamp()),
         )
-        userViewmodel = MeasureBatteryViewmodel(
-            battery=battery_measurement).to_dict()
+        userViewmodel = MeasureSolarPanelViewmodel(
+            solar_panel=solar_panel_measurement).to_dict()
 
         expected = {
-            'battery_id': "1",
-            'soc': 0.5,
-            'voltage': 3.7,
-            'current': 0.1,
-            'temperature': 25.0,
+            'solar_panel_id': "1",
+            'instantly': 0.5,
+            'daily': 3.7,
+            'monthly': 317.3,
+            'timestamp': int(datetime.datetime.now().timestamp()),
             'message': "the measure was created successfully"
         }
 
