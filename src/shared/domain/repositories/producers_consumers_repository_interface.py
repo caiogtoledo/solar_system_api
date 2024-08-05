@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import List
+from typing import List, Optional
 
 from src.shared.domain.entities.consumer import Consumer
 from src.shared.domain.entities.solar_panel import SolarPanel
@@ -16,9 +16,9 @@ class IProducersConsumersRepository(ABC):
         pass
 
     @ abstractmethod
-    def get_last_solar_panel_measure(self, solar_panel_id: str) -> SolarPanel:
+    def get_last_solar_panel_measure(self, solar_panel_id: str) -> Optional[SolarPanel]:
         pass
 
     @ abstractmethod
-    def get_last_consumer_measure(self, consumer_id: str) -> Consumer:
+    def get_last_consumer_measure(self, consumer_id: str) -> Optional[Consumer]:
         pass

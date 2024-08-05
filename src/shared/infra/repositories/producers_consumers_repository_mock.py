@@ -42,5 +42,11 @@ class ProducersConsumersRepositoryMock(IProducersConsumersRepository):
             return None
         return measurements[-1]
 
-    def get_last_consumer_measure(self) -> Consumer:
+    def get_last_consumer_measure(self, consumer_id) -> Consumer:
+        measurements = []
+        for measure in self.consumer_measurements:
+            if measure.consumer_id == consumer_id:
+                measurements.append(measure)
+        if len(measurements) == 0:
+            return None
         return self.consumer_measurements[-1]
