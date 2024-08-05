@@ -5,11 +5,12 @@ from src.shared.helpers.errors.domain_errors import EntityError
 
 class Consumer(abc.ABC):
     consumer_id: str
-    instantly: float # W
-    daily: float # KWh
-    monthly: float # KWh
+    instantly: float  # W
+    daily: float  # KWh
+    monthly: float  # KWh
+    timestamp: int  # milisseconds
 
-    def __init__(self, consumer_id: str, instantly: float, daily: float, monthly: float, temperature: float):
+    def __init__(self, consumer_id: str, instantly: float, daily: float, monthly: float, timestamp: int):
         if not self.validate_consumer_id(consumer_id):
             raise EntityError("consumer_id")
         self.consumer_id = consumer_id
@@ -25,6 +26,10 @@ class Consumer(abc.ABC):
         if not self.validate_monthly(monthly):
             raise EntityError("monthly")
         self.monthly = monthly
+
+        if not self.validate_timestamp(timestamp):
+            raise EntityError("timestamp")
+        self.timestamp = timestamp
 
     @staticmethod
     def validate_consumer_id(consumer_id: str) -> bool:
@@ -42,8 +47,11 @@ class Consumer(abc.ABC):
     def validate_monthly(monthly: float) -> bool:
         return isinstance(monthly, (int, float))
 
+    @staticmethod
+    def validate_timestamp(timestamp: int) -> bool:
+        return isinstance(timestamp, (int))
 
     def __repr__(self):
         return (f"Consumer(consumer_id={self.consumer_id}, instantly={self.instantly}, "
                 f"daily={self.daily}, monthly={self.monthly}, "
-        )
+                )
