@@ -34,7 +34,7 @@ class Test_MeasureSolarPanelUsecase:
 
         assert repo.solar_panel_measurements[-1] == solar_panel_measurement
 
-    def test_create_user_invalid_solar_panel_id(self):
+    def test_create_solar_panel_measurement_invalid_solar_panel_id(self):
         repo = ProducersConsumersRepositoryMock()
         usecase = MeasureSolarPanelUsecase(repo)
 
@@ -45,7 +45,7 @@ class Test_MeasureSolarPanelUsecase:
                 timestamp=None,
             )
 
-    def test_create_user_invalid_instantly(self):
+    def test_create_solar_panel_measurement_invalid_instantly(self):
         repo = ProducersConsumersRepositoryMock()
         usecase = MeasureSolarPanelUsecase(repo)
 
