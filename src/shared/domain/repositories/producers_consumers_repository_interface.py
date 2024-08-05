@@ -16,9 +16,9 @@ class IProducersConsumersRepository(ABC):
         pass
 
     @ abstractmethod
-    def get_last_solar_panel_measure(self) -> SolarPanel:
+    def get_last_solar_panel_measure(self, solar_panel_id: str) -> SolarPanel:
         pass
 
     @ abstractmethod
-    def get_last_consumer_measure(self) -> Consumer:
+    def get_last_consumer_measure(self, consumer_id: str) -> Consumer:
         pass
