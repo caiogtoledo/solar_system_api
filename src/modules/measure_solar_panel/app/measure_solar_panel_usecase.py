@@ -14,6 +14,13 @@ class MeasureSolarPanelUsecase:
         self.repo = repo
 
     def __call__(self, solar_panel_id: float, instantly: float, timestamp: Optional[int]) -> SolarPanel:
+        validate = SolarPanel.validate_solar_panel_id(solar_panel_id)
+        if not validate:
+            raise CreationError("Invalid solar panel id")
+        validate = SolarPanel.validate_instantly(instantly)
+        if not validate:
+            raise CreationError("Invalid instantly value")
+
         last_measure: SolarPanel = self.repo.get_last_solar_panel_measure(
             solar_panel_id)
 
