@@ -4,11 +4,11 @@ from src.shared.helpers.errors.domain_errors import EntityError
 
 
 class Measurement(abc.ABC):
-    id: str
-    value: float # ex: 100
-    type: str # ex: irradiacao_solar (CRIAR UM ENUM?)
-    unit: str # ex: W/m2 (CRIAR UM ENUM?)
-    timestamp: float # ex: 1631533200 milissigundos
+    measurement_id: str
+    value: float  # ex: 100
+    type: str  # ex: irradiacao_solar (CRIAR UM ENUM DEPOIS)
+    unit: str  # ex: W/m2 (CRIAR UM ENUM VINCULADO AO TYPE?)
+    timestamp: float  # ex: 1631533200 milissigundos
 
     def __init__(self, measurement_id: str, value: float, type: str, unit: str, timestamp: float):
         if not self.validate_measurement_id(measurement_id):
@@ -42,7 +42,7 @@ class Measurement(abc.ABC):
     @staticmethod
     def validate_type(type: str) -> bool:
         return isinstance(type, str) and len(type) > 0
-    
+
     @staticmethod
     def validate_unit(unit: str) -> bool:
         return isinstance(unit, str) and len(unit) > 0
@@ -50,7 +50,6 @@ class Measurement(abc.ABC):
     @staticmethod
     def validate_timestamp(timestamp: float) -> bool:
         return isinstance(timestamp, (int, float))
-
 
     def __repr__(self):
         return (f"Measurement(measurement_id={self.measurement_id}, value={self.value}, "

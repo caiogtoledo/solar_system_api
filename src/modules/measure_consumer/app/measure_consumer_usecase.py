@@ -12,7 +12,7 @@ class MeasureConsumerUsecase:
     def __init__(self, repo: IProducersConsumersRepository):
         self.repo = repo
 
-    def __call__(self, consumer_id: float, instantly: float, timestamp: Optional[int]) -> Consumer:
+    def __call__(self, consumer_id: str, instantly: float, timestamp: Optional[int]) -> Consumer:
         validate = Consumer.validate_consumer_id(consumer_id)
         if not validate:
             raise CreationError("Invalid consumer id")
