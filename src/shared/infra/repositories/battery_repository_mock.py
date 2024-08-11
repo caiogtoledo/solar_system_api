@@ -24,4 +24,4 @@ class BatteryRepositoryMock(IBatteryRepository):
         return new_measurement
 
     def get_all_battery_measurements(self) -> List[Battery]:
-        return self.battery_measurements
+        return sorted(self.battery_measurements, key=lambda bat: bat.timestamp)
