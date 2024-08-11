@@ -2,6 +2,7 @@ from typing import List
 
 from src.shared.domain.entities.battery import Battery
 from src.shared.domain.repositories.battery_repository_interface import IBatteryRepository
+import datetime
 
 
 class BatteryRepositoryMock(IBatteryRepository):
@@ -9,9 +10,12 @@ class BatteryRepositoryMock(IBatteryRepository):
 
     def __init__(self):
         self.battery_measurements = [
-            Battery(battery_id="1", soc=0.50, voltage=0.5, current=0.5, temperature=30.0),
-            Battery(battery_id="1", soc=0.51, voltage=0.5, current=0.5, temperature=30.1),
-            Battery(battery_id="1", soc=0.52, voltage=0.5, current=0.5, temperature=30.2),
+            Battery(battery_id="1", soc=0.50, voltage=0.5, current=0.5,
+                    temperature=30.0, timestamp=int(datetime.datetime.now().timestamp())-2),
+            Battery(battery_id="1", soc=0.51, voltage=0.5, current=0.5,
+                    temperature=30.1, timestamp=int(datetime.datetime.now().timestamp())-1),
+            Battery(battery_id="1", soc=0.52, voltage=0.5, current=0.5,
+                    temperature=30.2, timestamp=int(datetime.datetime.now().timestamp())),
         ]
         self.user_counter = 3
 

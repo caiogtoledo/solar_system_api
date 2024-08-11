@@ -1,5 +1,6 @@
 from src.modules.measure_battery.app.measure_battery_viewmodel import MeasureBatteryViewmodel
 from src.shared.domain.entities.battery import Battery
+import datetime
 
 
 class Test_MeasureBatteryViewModel:
@@ -11,6 +12,7 @@ class Test_MeasureBatteryViewModel:
             voltage=3.7,
             current=0.1,
             temperature=25.0,
+            timestamp=int(datetime.datetime.now().timestamp())
         )
         userViewmodel = MeasureBatteryViewmodel(
             battery=battery_measurement).to_dict()
@@ -21,6 +23,7 @@ class Test_MeasureBatteryViewModel:
             'voltage': 3.7,
             'current': 0.1,
             'temperature': 25.0,
+            'timestamp': int(datetime.datetime.now().timestamp()),
             'message': "the measure was created successfully"
         }
 

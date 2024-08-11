@@ -11,8 +11,9 @@ class Battery(abc.ABC):
     temperature: float
     MIN_SOC = 0
     MAX_SOC = 100
+    timestamp: int  # milisseconds
 
-    def __init__(self, battery_id: str, soc: float, voltage: float, current: float, temperature: float):
+    def __init__(self, battery_id: str, soc: float, voltage: float, current: float, temperature: float, timestamp: int):
         if not self.validate_battery_id(battery_id):
             raise EntityError("battery_id")
         self.battery_id = battery_id
@@ -32,6 +33,10 @@ class Battery(abc.ABC):
         if not self.validate_temperature(temperature):
             raise EntityError("temperature")
         self.temperature = temperature
+
+        if not self.validate_timestamp(timestamp):
+            raise EntityError("timestamp")
+        self.timestamp = timestamp
 
     @staticmethod
     def validate_battery_id(battery_id: str) -> bool:
@@ -53,7 +58,11 @@ class Battery(abc.ABC):
     def validate_temperature(temperature: float) -> bool:
         return isinstance(temperature, (int, float))
 
+    @staticmethod
+    def validate_timestamp(timestamp: int) -> bool:
+        return isinstance(timestamp, (int))
+
     def __repr__(self):
         return (f"Battery(battery_id={self.battery_id}, soc={self.soc}, "
                 f"voltage={self.voltage}, current={self.current}, "
-                f"temperature={self.temperature})")
+                f"temperature={self.temperature}, timestamp={self.timestamp})")

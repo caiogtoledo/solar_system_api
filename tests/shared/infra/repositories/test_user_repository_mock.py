@@ -1,8 +1,7 @@
 from src.shared.domain.entities.battery import Battery
-from src.shared.domain.enums.state_enum import STATE
-from src.shared.helpers.errors.usecase_errors import NoItemsFound
 from src.shared.infra.repositories.battery_repository_mock import BatteryRepositoryMock
 import pytest
+import datetime
 
 
 class Test_BatteryRepositoryMock:
@@ -12,7 +11,9 @@ class Test_BatteryRepositoryMock:
                               soc=0.50,
                               voltage=0.5,
                               current=0.5,
-                              temperature=30.0
+                              temperature=30.0,
+                              timestamp=int(
+                                  datetime.datetime.now().timestamp())
                               )
 
         repo.create_measure(measurement)
@@ -22,6 +23,8 @@ class Test_BatteryRepositoryMock:
         assert repo.battery_measurements[-1].voltage == 0.5
         assert repo.battery_measurements[-1].current == 0.5
         assert repo.battery_measurements[-1].temperature == 30.0
+        assert repo.battery_measurements[-1].timestamp == int(
+            datetime.datetime.now().timestamp())
 
     def test_get_all_battery_measurements(self):
         repo = BatteryRepositoryMock()

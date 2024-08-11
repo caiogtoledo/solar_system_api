@@ -8,6 +8,7 @@ class MeasureBatteryViewmodel:
     voltage: float
     current: float
     temperature: float
+    timestamp: int
 
     def __init__(self, battery: Battery):
         self.battery_id = battery.battery_id
@@ -15,6 +16,7 @@ class MeasureBatteryViewmodel:
         self.voltage = battery.voltage
         self.current = battery.current
         self.temperature = battery.temperature
+        self.timestamp = battery.timestamp
 
     def to_dict(self):
         return {
@@ -23,5 +25,6 @@ class MeasureBatteryViewmodel:
             'voltage': self.voltage,
             'current': self.current,
             'temperature': self.temperature,
+            'timestamp': self.timestamp,
             'message': "the measure was created successfully"
         }

@@ -2,6 +2,7 @@ from src.modules.measure_battery.app.measure_battery_controller import MeasureBa
 from src.modules.measure_battery.app.measure_battery_usecase import MeasureBatteryUsecase
 from src.shared.helpers.external_interfaces.http_models import HttpRequest
 from src.shared.infra.repositories.battery_repository_mock import BatteryRepositoryMock
+import datetime
 
 
 class Test_MeasureBatteryControler:
@@ -15,7 +16,8 @@ class Test_MeasureBatteryControler:
             'soc': 0.5,
             'voltage': 3.7,
             'current': 0.1,
-            'temperature': 25.0
+            'temperature': 25.0,
+            'timestamp': int(datetime.datetime.now().timestamp())
         })
 
         response = controller(request=request)
@@ -26,6 +28,7 @@ class Test_MeasureBatteryControler:
         assert response.body['voltage'] == repo.battery_measurements[-1].voltage
         assert response.body['current'] == repo.battery_measurements[-1].current
         assert response.body['temperature'] == repo.battery_measurements[-1].temperature
+        assert response.body['timestamp'] == repo.battery_measurements[-1].timestamp
         assert response.body['message'] == "the measure was created successfully"
 
     def test_create_user_controller_missing_battery_id(self):
@@ -38,7 +41,8 @@ class Test_MeasureBatteryControler:
             'soc': 0.5,
             'voltage': 3.7,
             'current': 0.1,
-            'temperature': 25.0
+            'temperature': 25.0,
+            'timestamp': int(datetime.datetime.now().timestamp())
         })
 
         response = controller(request=request)
@@ -56,7 +60,8 @@ class Test_MeasureBatteryControler:
             # 'soc': 0.5,
             'voltage': 3.7,
             'current': 0.1,
-            'temperature': 25.0
+            'temperature': 25.0,
+            'timestamp': int(datetime.datetime.now().timestamp())
         })
 
         response = controller(request=request)
@@ -74,7 +79,8 @@ class Test_MeasureBatteryControler:
             'soc': 0.5,
             # 'voltage': 3.7,
             'current': 0.1,
-            'temperature': 25.0
+            'temperature': 25.0,
+            'timestamp': int(datetime.datetime.now().timestamp())
         })
 
         response = controller(request=request)
@@ -92,7 +98,8 @@ class Test_MeasureBatteryControler:
             'soc': 0.5,
             'voltage': 3.7,
             # 'current': 0.1,
-            'temperature': 25.0
+            'temperature': 25.0,
+            'timestamp': int(datetime.datetime.now().timestamp())
         })
 
         response = controller(request=request)
@@ -110,7 +117,8 @@ class Test_MeasureBatteryControler:
             'soc': 0.5,
             'voltage': 3.7,
             'current': 0.1,
-            # 'temperature': 25.0
+            # 'temperature': 25.0,
+            'timestamp': int(datetime.datetime.now().timestamp())
         })
 
         response = controller(request=request)
@@ -128,7 +136,8 @@ class Test_MeasureBatteryControler:
             'soc': 0.5,
             'voltage': 3.7,
             'current': 0.1,
-            'temperature': 25.0
+            'temperature': 25.0,
+            'timestamp': int(datetime.datetime.now().timestamp())
         })
 
         response = controller(request=request)
@@ -146,7 +155,8 @@ class Test_MeasureBatteryControler:
             'soc': "0.5 V",
             'voltage': 3.7,
             'current': 0.1,
-            'temperature': 25.0
+            'temperature': 25.0,
+            'timestamp': int(datetime.datetime.now().timestamp())
         })
 
         response = controller(request=request)
@@ -164,7 +174,8 @@ class Test_MeasureBatteryControler:
             'soc': 0.5,
             'voltage': "3.7 v",
             'current': 0.1,
-            'temperature': 25.0
+            'temperature': 25.0,
+            'timestamp': int(datetime.datetime.now().timestamp())
         })
 
         response = controller(request=request)
@@ -182,7 +193,8 @@ class Test_MeasureBatteryControler:
             'soc': 0.5,
             'voltage': 3.7,
             'current': ["0.1"],
-            'temperature': 25.0
+            'temperature': 25.0,
+            'timestamp': int(datetime.datetime.now().timestamp())
         })
 
         response = controller(request=request)
