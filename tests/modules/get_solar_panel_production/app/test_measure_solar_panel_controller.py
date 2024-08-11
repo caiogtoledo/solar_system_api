@@ -29,8 +29,8 @@ class Test_MeasureSolarPanelControler:
         assert isinstance(response.body['monthly'], float)
 
         assert response.body['daily'] <= response.body['monthly']
-        assert response.body['message'] == f"this is the last measure of the solar panel: {
-            response.body['solar_panel_id']}"
+        assert response.body['message'] == f"""this is the last measure of the solar panel: {
+            response.body['solar_panel_id']}"""
 
     def test_get_solar_panel_production_controller_missing_solar_panel_id(self):
         repo = ProducersConsumersRepositoryMock()
