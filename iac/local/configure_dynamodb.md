@@ -63,7 +63,7 @@ Next, you need to configure DynamoDB for your project and Docker compose. Follow
 
 ### Install the requirements
 
-    pip install -r requirements-dev.txt
+    pip install -r requirements.txt
 
 ### Configure Environment Variables
 
