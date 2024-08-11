@@ -154,7 +154,7 @@ Clone the repository using template
 
 ### Install the requirements
 
-    pip install -r requirements-dev.txt
+    pip install -r requirements.txt
 
 ### Run the tests
 
