@@ -3,6 +3,7 @@ import pytest
 from src.modules.measure_battery.app.measure_battery_usecase import MeasureBatteryUsecase
 from src.shared.helpers.errors.domain_errors import EntityError
 from src.shared.infra.repositories.battery_repository_mock import BatteryRepositoryMock
+import datetime
 
 
 class Test_MeasureBatteryUsecase:
@@ -16,7 +17,8 @@ class Test_MeasureBatteryUsecase:
             soc=0.50,
             voltage=0.5,
             current=0.5,
-            temperature=30.0
+            temperature=30.0,
+            timestamp=int(datetime.datetime.now().timestamp())
         )
 
         assert repo.battery_measurements[-1] == battery_measurement
@@ -31,5 +33,6 @@ class Test_MeasureBatteryUsecase:
                 soc=0.50,
                 voltage=0.5,
                 current=0.5,
-                temperature=30.0
+                temperature=30.0,
+                timestamp=int(datetime.datetime.now().timestamp())
             )

@@ -10,14 +10,15 @@ class MeasureBatteryUsecase:
     def __init__(self, repo: IBatteryRepository):
         self.repo = repo
 
-    def __call__(self, battery_id: float, soc: float, voltage: float, current: float, temperature: float) -> Battery:
+    def __call__(self, battery_id: float, soc: float, voltage: float, current: float, temperature: float, timestamp: int) -> Battery:
 
         measure = Battery(
             battery_id=battery_id,
-            soc= soc,
-            voltage= voltage,
-            current= current,
-            temperature=temperature
+            soc=soc,
+            voltage=voltage,
+            current=current,
+            temperature=temperature,
+            timestamp=timestamp
         )
 
         return self.repo.create_measure(measure)

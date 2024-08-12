@@ -31,6 +31,7 @@ class MeasureBatteryController:
                 voltage=request.data.get('voltage'),
                 current=request.data.get('current'),
                 temperature=request.data.get('temperature'),
+                timestamp=request.data.get('timestamp'),
             )
 
             viewmodel = MeasureBatteryViewmodel(measure)

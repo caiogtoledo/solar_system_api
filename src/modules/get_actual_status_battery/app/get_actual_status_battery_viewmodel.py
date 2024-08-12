@@ -1,9 +1,8 @@
 from src.shared.domain.entities.battery import Battery
-from src.shared.domain.enums.state_enum import STATE
 
 
-class MeasureBatteryViewmodel:
-    battery_id: int
+class GetActualStatusBatteryViewmodel:
+    battery_id: str
     soc: float
     voltage: float
     current: float
@@ -26,5 +25,5 @@ class MeasureBatteryViewmodel:
             'current': self.current,
             'temperature': self.temperature,
             'timestamp': self.timestamp,
-            'message': "the measure was created successfully"
+            'message': f"this is the last status of battery: {self.battery_id}"
         }
