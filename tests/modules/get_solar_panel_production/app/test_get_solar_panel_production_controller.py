@@ -6,7 +6,7 @@ from src.shared.helpers.external_interfaces.http_models import HttpRequest
 from src.shared.infra.repositories.producers_consumers_repository_mock import ProducersConsumersRepositoryMock
 
 
-class Test_MeasureSolarPanelControler:
+class Test_GetSolarPanelProductionControler:
     def test_get_solar_panel_production_controller(self):
         repo = ProducersConsumersRepositoryMock()
         usecase = GetSolarPanelProductionUsecase(repo=repo)
