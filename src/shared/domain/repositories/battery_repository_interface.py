@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import List
+from typing import List, Optional
 
 from src.shared.domain.entities.battery import Battery
 
@@ -12,4 +12,8 @@ class IBatteryRepository(ABC):
 
     @abstractmethod
     def get_all_battery_measurements(self) -> List[Battery]:
+        pass
+
+    @abstractmethod
+    def get_last_battery_measurement_by_id(self, battery_id: str) -> Optional[Battery]:
         pass

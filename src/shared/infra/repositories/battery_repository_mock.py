@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 
 from src.shared.domain.entities.battery import Battery
 from src.shared.domain.repositories.battery_repository_interface import IBatteryRepository
@@ -25,3 +25,12 @@ class BatteryRepositoryMock(IBatteryRepository):
 
     def get_all_battery_measurements(self) -> List[Battery]:
         return sorted(self.battery_measurements, key=lambda bat: bat.timestamp)
+
+    def get_last_battery_measurement_by_id(self, battery_id: str) -> Optional[Battery]:
+        measurements: List[Battery] = []
+        for measure in self.battery_measurements:
+            if measure.battery_id == battery_id:
+                measurements.append(measure)
+        if len(measurements) == 0:
+            return None
+        return sorted(measurements, key=lambda bat: bat.timestamp)[-1]
