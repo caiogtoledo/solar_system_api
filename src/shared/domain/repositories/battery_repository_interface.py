@@ -11,7 +11,7 @@ class IBatteryRepository(ABC):
         pass
 
     @abstractmethod
-    def get_all_battery_measurements(self) -> List[Battery]:
+    def get_all_battery_measurements(self, battery_id: str) -> List[Battery]:
         pass
 
     @abstractmethod

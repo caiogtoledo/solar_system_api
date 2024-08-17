@@ -1,5 +1,6 @@
-from src.modules.get_actual_status_battery.app.get_actual_status_battery_usecase import GetActualStatusBatteryUsecase
-from src.modules.get_actual_status_battery.app.get_actual_status_battery_viewmodel import GetActualStatusBatteryViewmodel
+
+from src.modules.get_status_battery_history.app.get_battery_status_history_usecase import GetBatteryStatusHistoryUsecase
+from src.modules.get_status_battery_history.app.get_battery_status_history_viewmodel import GetBatteryStatusHistoryViewmodel
 from src.shared.domain.entities.battery import Battery
 from src.shared.helpers.external_interfaces.external_interface import IResponse, IRequest
 from src.shared.helpers.errors.controller_errors import MissingParameters, WrongTypeParameter
@@ -10,8 +11,8 @@ from src.shared.helpers.external_interfaces.http_codes import OK, NotFound, BadR
 
 class GetBatteryStatusHistoryController:
 
-    def __init__(self, usecase: GetActualStatusBatteryUsecase):
-        self.GetActualStatusBatteryUsecase = usecase
+    def __init__(self, usecase: GetBatteryStatusHistoryUsecase):
+        self.GetBatteryStatusHistoryUsecase = usecase
 
     def __call__(self, request: IRequest) -> IResponse:
         try:
@@ -24,11 +25,11 @@ class GetBatteryStatusHistoryController:
                 raise WrongTypeParameter(
                     "battery_id", "str", type(battery_id))
 
-            measure = self.GetActualStatusBatteryUsecase(
+            measure = self.GetBatteryStatusHistoryUsecase(
                 battery_id=battery_id,
             )
 
-            viewmodel = GetActualStatusBatteryViewmodel(measure)
+            viewmodel = GetBatteryStatusHistoryViewmodel(measure)
 
             return OK(viewmodel.to_dict())
 
