@@ -1,3 +1,4 @@
+from typing import Optional
 from src.shared.domain.entities.alert import Alert
 
 
@@ -6,13 +7,15 @@ class AlertViewmodel:
     type: str
     message: str
     is_resolved: bool
-    timestamp: int
+    timestamp_created_at: int
+    timestamp_updated_at: Optional[int]
 
     def __init__(self, alert: Alert):
-        self.alertment_id = alert.alert_id
+        self.alert_id = alert.alert_id
         self.type = alert.type
         self.message = alert.message
-        self.timestamp = alert.timestamp
+        self.is_resolved = alert.is_resolved
+        self.timestamp = alert.timestamp_created_at
 
     def to_dict(self):
         return {
@@ -20,5 +23,6 @@ class AlertViewmodel:
             'type': self.type,
             'message': self.message,
             'is_resolved': self.is_resolved,
-            'timestamp': self.timestamp,
+            'timestamp_created_at': self.timestamp_created_at,
+            'timestamp_updated_at': self.timestamp_updated_at,
         }

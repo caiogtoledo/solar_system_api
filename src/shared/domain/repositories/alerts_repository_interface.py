@@ -1,19 +1,19 @@
 from abc import ABC, abstractmethod
-from typing import List, Optional
+from typing import List
 
-from src.shared.domain.entities.battery import Battery
+from src.shared.domain.entities.alert import Alert
 
 
 class IAlertsRepository(ABC):
 
     @abstractmethod
-    def create_alert(self, alert: Battery) -> None:
+    def create_alert(self, alert: Alert) -> None:
         pass
 
     @abstractmethod
-    def get_all_alerts(self, alert: str) -> List[Battery]:
+    def get_all_alerts(self) -> List[Alert]:
         pass
 
     @abstractmethod
-    def update_alert(self, alert: str) -> Optional[Battery]:
+    def update_alert(self, alert: str) -> Alert:
         pass

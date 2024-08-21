@@ -7,7 +7,7 @@ from src.shared.helpers.errors.usecase_errors import NoItemsFound
 from src.shared.helpers.external_interfaces.http_codes import NotFound, BadRequest, InternalServerError, Created
 
 
-class AlertController:
+class CreateAlertController:
 
     def __init__(self, usecase: CreateAlertUsecase):
         self.CreateAlertUsecase = usecase
@@ -26,7 +26,7 @@ class AlertController:
                 type=request.data.get('type'),
                 message=request.data.get('message'),
                 is_resolved=request.data.get('is_resolved'),
-                timestamp=request.data.get('timestamp'),
+                timestamp_created_at=request.data.get('timestamp_created_at'),
             )
 
             viewmodel = AlertViewmodel(measure)

@@ -12,7 +12,7 @@ class CreateAlertUsecase:
     def __init__(self, repo: IAlertsRepository):
         self.repo = repo
 
-    def __call__(self, alert_id: str, type: float, message: str, is_resolved: bool, timestamp: Optional[int]) -> Measurement:
+    def __call__(self, alert_id: str, type: float, message: str, is_resolved: bool, timestamp_created_at: Optional[int]) -> Measurement:
         validate = Alert.validate_alert_id(alert_id)
         if not validate:
             raise CreationError("Invalid alert id")
@@ -31,7 +31,8 @@ class CreateAlertUsecase:
             type=type,
             message=message,
             is_resolved=is_resolved or False,
-            timestamp=timestamp
+            timestamp_created_at=timestamp,
+            timestamp_created_at=None
         )
 
         try:

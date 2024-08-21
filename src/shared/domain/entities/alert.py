@@ -1,4 +1,5 @@
 import abc
+from typing import Optional
 
 from src.shared.helpers.errors.domain_errors import EntityError
 
@@ -8,9 +9,17 @@ class Alert(abc.ABC):
     type: float  # ex: baixa_carga_bateria
     message: str  #
     is_resolved: bool
-    timestamp: float  # ex: 1631533200 milissigundos
+    timestamp_created_at: int  # ex: 1631533200 milissigundos
+    timestamp_updated_at: Optional[int]  # ex: 1631533200 milissigundos
 
-    def __init__(self, alert_id: str, type: str, message: str, timestamp: float,  is_resolved: bool):
+    def __init__(self,
+                 alert_id: str,
+                 type: str,
+                 message: str,
+                 timestamp_created_at: float,
+                 timestamp_updated_at: float,
+                 is_resolved: bool
+                 ):
         if not self.validate_alert_id(alert_id):
             raise EntityError("alert_id")
         self.alert_id = alert_id
@@ -27,9 +36,11 @@ class Alert(abc.ABC):
             raise EntityError("is_resolved")
         self.is_resolved = is_resolved
 
-        if not self.validate_timestamp(timestamp):
-            raise EntityError("timestamp")
-        self.timestamp = timestamp
+        if not self.validate_timestamp(timestamp_created_at):
+            raise EntityError("timestamp_created_at")
+        self.timestamp_created_at = timestamp_created_at
+
+        self.timestamp_updated_at = timestamp_updated_at
 
     @staticmethod
     def validate_alert_id(alert_id: str) -> bool:
@@ -53,4 +64,7 @@ class Alert(abc.ABC):
 
     def __repr__(self):
         return (f"Alert(alert_id={self.alert_id}, type={self.type}, "
-                f"message={self.message}, is_resolved={self.is_resolved}, timestamp={self.timestamp})")
+                f"message={self.message}, is_resolved={self.is_resolved},
+                timestamp_created_at={self.timestamp_created_at},
+                timestamp_updated_at={self.timestamp_created_at}
+                )")
