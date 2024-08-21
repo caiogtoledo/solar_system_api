@@ -64,7 +64,7 @@ class Alert(abc.ABC):
 
     def __repr__(self):
         return (f"Alert(alert_id={self.alert_id}, type={self.type}, "
-                f"message={self.message}, is_resolved={self.is_resolved},
-                timestamp_created_at={self.timestamp_created_at},
-                timestamp_updated_at={self.timestamp_created_at}
-                )")
+                f"message={self.message}, is_resolved={self.is_resolved}, "
+                f"timestamp_created_at={self.timestamp_created_at}, "
+                f"timestamp_updated_at={self.timestamp_created_at}"
+                )

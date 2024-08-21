@@ -15,7 +15,8 @@ class AlertViewmodel:
         self.type = alert.type
         self.message = alert.message
         self.is_resolved = alert.is_resolved
-        self.timestamp = alert.timestamp_created_at
+        self.timestamp_created_at = alert.timestamp_created_at
+        self.timestamp_updated_at = alert.timestamp_updated_at
 
     def to_dict(self):
         return {

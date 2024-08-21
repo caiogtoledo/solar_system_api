@@ -9,12 +9,30 @@ class AlertsRepositoryMock(IAlertsRepository):
 
     def __init__(self):
         self.alerts = [
-            Alert(alert_id="1",
-                  type="irradiacao_solar", message="Alerta 1", is_resolved=False, timestamp=1643723400),
-            Alert(alert_id="2",
-                  type="irradiacao_solar", message="Alerta 2", is_resolved=True, timestamp=1643723410),
-            Alert(alert_id="3",
-                  type="irradiacao_solar", message="Alerta 3", is_resolved=False, timestamp=1643723420),
+            Alert(
+                alert_id="1",
+                type="irradiacao_solar",
+                message="Alerta 1",
+                is_resolved=False,
+                timestamp_created_at=1643723400,
+                timestamp_updated_at=None
+            ),
+            Alert(
+                alert_id="2",
+                type="irradiacao_solar",
+                message="Alerta 2",
+                is_resolved=True,
+                timestamp_created_at=1643723410,
+                timestamp_updated_at=1643723415
+            ),
+            Alert(
+                alert_id="3",
+                type="irradiacao_solar",
+                message="Alerta 3",
+                is_resolved=False,
+                timestamp_created_at=1643723420,
+                timestamp_updated_at=None
+            ),
         ]
 
     def create_alert(self, alert: Alert) -> None:
