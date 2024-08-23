@@ -1,7 +1,7 @@
 import datetime
 import pytest
 
-from src.modules.create_alert.app.alert_usecase import CreateAlertUsecase
+from src.modules.create_alert.app.create_alert_usecase import CreateAlertUsecase
 from src.shared.helpers.errors.usecase_errors import CreationError
 from src.shared.infra.repositories.alerts_repository_mock import AlertsRepositoryMock
 

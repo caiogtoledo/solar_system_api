@@ -1,7 +1,7 @@
 
 import datetime
 
-from src.modules.create_alert.app.alert_viewmodel import AlertViewmodel
+from src.modules.create_alert.app.create_alert_viewmodel import AlertViewmodel
 from src.shared.domain.entities.alert import Alert
 
 
