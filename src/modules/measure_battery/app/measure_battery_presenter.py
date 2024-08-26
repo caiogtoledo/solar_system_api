@@ -1,21 +1,17 @@
-from .measure_battery_controller import CreateUserController
-from .measure_battery_usecase import CreateUserUsecase
-from src.shared.environments import Environments
-from src.shared.helpers.external_interfaces.http_lambda_requests import LambdaHttpRequest, LambdaHttpResponse
+from src.modules.measure_battery.app.measure_battery_controller import MeasureBatteryController
+from src.modules.measure_battery.app.measure_battery_usecase import MeasureBatteryUsecase
+from src.shared.helpers.external_interfaces.http_models import HttpRequest, HttpResponse
+from src.shared.infra.repositories.battery_repository_mock import BatteryRepositoryMock
 
-repo = Environments.get_user_repo()()
-usecase = CreateUserUsecase(repo)
-controller = CreateUserController(usecase)
+repo = BatteryRepositoryMock()
+usecase = MeasureBatteryUsecase(repo=repo)
+controller = MeasureBatteryController(usecase=usecase)
 
-def lambda_handler(event, context):
 
-    from pprint import pprint
+def get_measure_battery_presenter(request):
+    request_data = request.body or dict(request.query_params)
+    request = HttpRequest(body=dict(request_data))
 
-    pprint(event)
+    response = controller(request=request)
 
-    httpRequest = LambdaHttpRequest(data=event)
-    response = controller(httpRequest)
-    httpResponse = LambdaHttpResponse(status_code=response.status_code, body=response.body, headers=response.headers)
-
-    return httpResponse.toDict()
-
+    return HttpResponse(body=response.body, status_code=response.status_code)

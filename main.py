@@ -5,6 +5,7 @@ from src.modules.get_actual_status_battery.app.get_actual_status_battery_present
 from src.modules.get_all_alerts.app.get_all_alerts_presenter import get_all_alerts_presenter
 from src.modules.get_solar_panel_production.app.get_solar_panel_production_presenter import get_solar_panel_production_presenter
 from src.modules.get_status_battery_history.app.get_battery_status_history_presenter import get_battery_status_history_presenter
+from src.modules.measure_battery.app.measure_battery_presenter import get_measure_battery_presenter
 from src.shared.helpers.external_interfaces.http_flask import FlaskHttpRequest, FlaskHttpResponse
 
 app = Flask(__name__)
@@ -44,6 +45,11 @@ def get_solar_panel_production():
 @app.route('/get-battery-status-history', methods=['POST', 'GET'])
 def get_status_battery_history():
     return flask_route(request, get_battery_status_history_presenter)
+
+
+@app.route('/measure-battery', methods=['POST', 'GET'])
+def get_measure_battery():
+    return flask_route(request, get_measure_battery_presenter)
 
 
 def solar_system_api(request):
