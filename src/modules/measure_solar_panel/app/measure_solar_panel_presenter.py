@@ -1,22 +1,17 @@
-from .measure_solar_panel_controller import CreateUserController
-from .measure_solar_panel_usecase import CreateUserUsecase
-from src.shared.environments import Environments
-from src.shared.helpers.external_interfaces.http_lambda_requests import LambdaHttpRequest, LambdaHttpResponse
+from src.modules.measure_solar_panel.app.measure_solar_panel_controller import MeasureSolarPanelController
+from src.modules.measure_solar_panel.app.measure_solar_panel_usecase import MeasureSolarPanelUsecase
+from src.shared.helpers.external_interfaces.http_models import HttpRequest, HttpResponse
+from src.shared.infra.repositories.producers_consumers_repository_mock import ProducersConsumersRepositoryMock
 
-repo = Environments.get_user_repo()()
-usecase = CreateUserUsecase(repo)
-controller = CreateUserController(usecase)
+repo = ProducersConsumersRepositoryMock()
+usecase = MeasureSolarPanelUsecase(repo=repo)
+controller = MeasureSolarPanelController(usecase=usecase)
 
 
-def lambda_handler(event, context):
+def measure_solar_panel_presenter(request):
+    request_data = request.body or dict(request.query_params)
+    request = HttpRequest(body=dict(request_data))
 
-    from pprint import pprint
+    response = controller(request=request)
 
-    pprint(event)
-
-    httpRequest = LambdaHttpRequest(data=event)
-    response = controller(httpRequest)
-    httpResponse = LambdaHttpResponse(
-        status_code=response.status_code, body=response.body, headers=response.headers)
-
-    return httpResponse.toDict()
+    return HttpResponse(body=response.body, status_code=response.status_code)

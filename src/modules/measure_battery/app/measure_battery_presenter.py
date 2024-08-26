@@ -8,7 +8,7 @@ usecase = MeasureBatteryUsecase(repo=repo)
 controller = MeasureBatteryController(usecase=usecase)
 
 
-def get_measure_battery_presenter(request):
+def measure_battery_presenter(request):
     request_data = request.body or dict(request.query_params)
     request = HttpRequest(body=dict(request_data))
 

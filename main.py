@@ -5,7 +5,10 @@ from src.modules.get_actual_status_battery.app.get_actual_status_battery_present
 from src.modules.get_all_alerts.app.get_all_alerts_presenter import get_all_alerts_presenter
 from src.modules.get_solar_panel_production.app.get_solar_panel_production_presenter import get_solar_panel_production_presenter
 from src.modules.get_status_battery_history.app.get_battery_status_history_presenter import get_battery_status_history_presenter
-from src.modules.measure_battery.app.measure_battery_presenter import get_measure_battery_presenter
+from src.modules.measure_battery.app.measure_battery_presenter import measure_battery_presenter
+from src.modules.measure_consumer.app.measure_consumer_presenter import measure_consumer_presenter
+from src.modules.measure_sensor.app.measure_sensor_presenter import measure_sensor_presenter
+from src.modules.measure_solar_panel.app.measure_solar_panel_presenter import measure_solar_panel_presenter
 from src.shared.helpers.external_interfaces.http_flask import FlaskHttpRequest, FlaskHttpResponse
 
 app = Flask(__name__)
@@ -48,8 +51,23 @@ def get_status_battery_history():
 
 
 @app.route('/measure-battery', methods=['POST', 'GET'])
-def get_measure_battery():
-    return flask_route(request, get_measure_battery_presenter)
+def measure_battery():
+    return flask_route(request, measure_battery_presenter)
+
+
+@app.route('/measure-consumer', methods=['POST', 'GET'])
+def measure_consumer():
+    return flask_route(request, measure_consumer_presenter)
+
+
+@app.route('/measure-sensor', methods=['POST', 'GET'])
+def measure_sensor():
+    return flask_route(request, measure_sensor_presenter)
+
+
+@app.route('/measure-solar-panel', methods=['POST', 'GET'])
+def measure_solar_panel():
+    return flask_route(request, measure_solar_panel_presenter)
 
 
 def solar_system_api(request):
