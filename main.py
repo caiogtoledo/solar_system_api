@@ -15,39 +15,35 @@ def health_check():
     return "Solar System API is running"
 
 
+def flask_route(request, presenter):
+    flask_request = FlaskHttpRequest(request)
+    res = presenter(flask_request)
+    return FlaskHttpResponse(body=res.body, status_code=res.status_code).to_flask_response()
+
+
 @app.route('/get-all-alerts', methods=['GET'])
 def get_all_alerts():
-    flask_request = FlaskHttpRequest(request)
-    res = get_all_alerts_presenter(flask_request)
-    return FlaskHttpResponse(body=res.body, status_code=res.status_code).to_flask_response()
+    return flask_route(request, get_all_alerts_presenter)
 
 
 @app.route('/create-alert', methods=['POST'])
 def create_alert():
-    flask_request = FlaskHttpRequest(request)
-    res = create_alert_presenter(flask_request)
-    return FlaskHttpResponse(body=res.body, status_code=res.status_code).to_flask_response()
+    return flask_route(request, create_alert_presenter)
 
 
 @app.route('/get-actual-status-battery', methods=['POST', 'GET'])
 def get_actual_status_battery():
-    flask_request = FlaskHttpRequest(request)
-    res = get_actual_status_battery_presenter(flask_request)
-    return FlaskHttpResponse(body=res.body, status_code=res.status_code).to_flask_response()
+    return flask_route(request, get_actual_status_battery_presenter)
 
 
 @app.route('/get-solar-panel-production', methods=['POST', 'GET'])
 def get_solar_panel_production():
-    flask_request = FlaskHttpRequest(request)
-    res = get_solar_panel_production_presenter(flask_request)
-    return FlaskHttpResponse(body=res.body, status_code=res.status_code).to_flask_response()
+    return flask_route(request, get_solar_panel_production_presenter)
 
 
 @app.route('/get-battery-status-history', methods=['POST', 'GET'])
 def get_status_battery_history():
-    flask_request = FlaskHttpRequest(request)
-    res = get_battery_status_history_presenter(flask_request)
-    return FlaskHttpResponse(body=res.body, status_code=res.status_code).to_flask_response()
+    return flask_route(request, get_battery_status_history_presenter)
 
 
 def solar_system_api(request):
