@@ -19,9 +19,8 @@ class BatteryRepositoryMock(IBatteryRepository):
         ]
         self.user_counter = 3
 
-    def create_measure(self, new_measurement: Battery) -> Battery:
+    def create_measure(self, new_measurement: Battery) -> None:
         self.battery_measurements.append(new_measurement)
-        return new_measurement
 
     def get_all_battery_measurements(self, battery_id: str) -> List[Battery]:
         measurements: List[Battery] = []

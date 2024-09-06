@@ -4,6 +4,7 @@ from typing import Optional
 import datetime
 from src.shared.domain.entities.battery import Battery
 from src.shared.domain.repositories.battery_repository_interface import IBatteryRepository
+from src.shared.helpers.errors.usecase_errors import CreationError
 
 
 class MeasureBatteryUsecase:
@@ -24,4 +25,9 @@ class MeasureBatteryUsecase:
             timestamp=timestamp
         )
 
-        return self.repo.create_measure(measure)
+        try:
+            self.repo.create_measure(measure)
+        except Exception as e:
+            raise CreationError("Error creating battery measure: {e}")
+
+        return measure
