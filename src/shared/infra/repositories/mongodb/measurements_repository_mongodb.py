@@ -1,16 +1,18 @@
-from typing import List, Optional
+from typing import Optional
 from pymongo import MongoClient
 from pymongo.errors import ConnectionFailure
 from src.shared.domain.entities.measurement import Measurement
 from src.shared.domain.repositories.measurements_repository_interface import IMeasurementsRepository
+from src.shared.environments import Environments
 
 
 class MeasurementsRepositoryMongoDB(IMeasurementsRepository):
-    def __init__(self, uri: str, db_name: str, collection_name: str):
+    def __init__(self):
         print("Iniciando conexão com o MongoDB")
-        self.client = MongoClient(uri)
-        self.db = self.client[db_name]
-        self.collection = self.db[collection_name]
+        self.client = MongoClient(Environments.get_envs().mongo_uri)
+        self.db = self.client[Environments.get_envs().mongo_db_name]
+        DB_NAME = "measurements"
+        self.collection = self.db[DB_NAME]
         self.validate_connection()
 
     def validate_connection(self):

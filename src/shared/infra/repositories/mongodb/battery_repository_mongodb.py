@@ -3,14 +3,16 @@ from pymongo import MongoClient
 from pymongo.errors import ConnectionFailure
 from src.shared.domain.entities.battery import Battery
 from src.shared.domain.repositories.battery_repository_interface import IBatteryRepository
+from src.shared.environments import Environments
 
 
 class BatteryRepositoryMongoDB(IBatteryRepository):
-    def __init__(self, uri: str, db_name: str, collection_name: str):
+    def __init__(self):
         print("Iniciando conexão com o MongoDB")
-        self.client = MongoClient(uri)
-        self.db = self.client[db_name]
-        self.collection = self.db[collection_name]
+        self.client = MongoClient(Environments.get_envs().mongo_uri)
+        self.db = self.client[Environments.get_envs().mongo_db_name]
+        DB_NAME = "batteries"
+        self.collection = self.db[DB_NAME]
         self.validate_connection()
 
     def validate_connection(self):
@@ -22,20 +24,16 @@ class BatteryRepositoryMongoDB(IBatteryRepository):
             print("Falha ao conectar ao MongoDB.")
             raise
 
-    def create_measure(self, new_measurement: Battery) -> Battery:
-        self.collection.insert_one(new_measurement.__dict__)
-        return new_measurement
+    def create_measure(self, measure: Battery) -> None:
+        self.collection.insert_one(measure.__dict__)
 
-    def get_all_battery_measurements(self, battery_id: str) -> Optional[List[Battery]]:
+    def get_all_battery_measurements(self, battery_id: str) -> List[Battery]:
         documents = self.collection.find({"battery_id": battery_id})
         measurements = []
         for document in documents:
             # Remove o campo _id que é gerado automaticamente pelo MongoDB
             document.pop("_id", None)
             measurements.append(Battery(**document))
-
-        if not measurements:
-            return None
         return sorted(measurements, key=lambda bat: bat.timestamp)
 
     def get_last_battery_measurement_by_id(self, battery_id: str) -> Optional[Battery]:

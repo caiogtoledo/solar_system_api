@@ -1,17 +1,19 @@
-from typing import List, Optional
+from typing import Optional
 from pymongo import MongoClient
 from pymongo.errors import ConnectionFailure
 from src.shared.domain.entities.solar_panel import SolarPanel
 from src.shared.domain.entities.consumer import Consumer
 from src.shared.domain.repositories.producers_consumers_repository_interface import IProducersConsumersRepository
+from src.shared.environments import Environments
 
 
 class ProducersConsumersRepositoryMongoDB(IProducersConsumersRepository):
-    def __init__(self, uri: str, db_name: str, collection_name: str):
+    def __init__(self):
         print("Iniciando conexão com o MongoDB")
-        self.client = MongoClient(uri)
-        self.db = self.client[db_name]
-        self.collection = self.db[collection_name]
+        self.client = MongoClient(Environments.get_envs().mongo_uri)
+        self.db = self.client[Environments.get_envs().mongo_db_name]
+        DB_NAME = "producers_consumers"
+        self.collection = self.db[DB_NAME]
         self.validate_connection()
 
     def validate_connection(self):
@@ -42,6 +44,7 @@ class ProducersConsumersRepositoryMongoDB(IProducersConsumersRepository):
         last_measurement = list(document)
         if last_measurement:
             last_measurement[0].pop("_id", None)
+            last_measurement[0].pop("type", None)
             return SolarPanel(**last_measurement[0])
         return None
 
@@ -52,5 +55,6 @@ class ProducersConsumersRepositoryMongoDB(IProducersConsumersRepository):
         last_measurement = list(document)
         if last_measurement:
             last_measurement[0].pop("_id", None)
+            last_measurement[0].pop("type", None)
             return Consumer(**last_measurement[0])
         return None

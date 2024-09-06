@@ -3,14 +3,18 @@ from pymongo import MongoClient
 from pymongo.errors import ConnectionFailure
 from src.shared.domain.entities.alert import Alert
 from src.shared.domain.repositories.alerts_repository_interface import IAlertsRepository
+from src.shared.environments import Environments
 
 
 class AlertsRepositoryMongoDB(IAlertsRepository):
-    def __init__(self, uri: str, db_name: str, collection_name: str):
+    def __init__(self):
         print("Iniciando conexão com o MongoDB")
-        self.client = MongoClient(uri)
-        self.db = self.client[db_name]
-        self.collection = self.db[collection_name]
+        MONGO_URI = Environments.get_envs().mongo_uri
+        self.client = MongoClient(MONGO_URI)
+        DB_NAME = Environments.get_envs().mongo_db_name
+        self.db = self.client[DB_NAME]
+        COLLECTION_NAME = "alerts"
+        self.collection = self.db[COLLECTION_NAME]
         self.validate_connection()
 
     def validate_connection(self):
