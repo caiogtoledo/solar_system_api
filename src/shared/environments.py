@@ -1,9 +1,10 @@
-import enum
 from enum import Enum
 import os
-from src.shared.domain.observability.observability_interface import IObservability
 
-from src.shared.domain.repositories.battery_repository_interface import IUserRepository
+from src.shared.domain.repositories.alerts_repository_interface import IAlertsRepository
+from src.shared.domain.repositories.battery_repository_interface import IBatteryRepository
+from src.shared.domain.repositories.measurements_repository_interface import IMeasurementsRepository
+from src.shared.domain.repositories.producers_consumers_repository_interface import IProducersConsumersRepository
 
 
 class STAGE(Enum):
@@ -22,66 +23,66 @@ class Environments:
 
     """
     stage: STAGE
-    s3_bucket_name: str
-    region: str
-    endpoint_url: str = None
-    dynamo_table_name: str
-    dynamo_partition_key: str
-    dynamo_sort_key: str
-    cloud_frontget_user_presenter_distribution_domain: str
-    mss_name: str 
+    mongo_uri: str
+    mongo_db_name: str
 
     def _configure_local(self):
         from dotenv import load_dotenv
         load_dotenv()
-        os.environ["STAGE"] = os.environ.get("STAGE") or STAGE.DOTENV.value
+        os.environ["ENV"] = os.environ.get("ENV") or STAGE.DOTENV.value
 
     def load_envs(self):
-        if "STAGE" not in os.environ or os.environ["STAGE"] == STAGE.DOTENV.value:
+        if "ENV" not in os.environ or os.environ["ENV"] == STAGE.DOTENV.value:
             self._configure_local()
 
-        self.stage = STAGE[os.environ.get("STAGE")]
-        self.mss_name = os.environ.get("MSS_NAME")
-        
-        if self.stage == STAGE.TEST:
-            self.s3_bucket_name = "bucket-test"
-            self.region = "sa-east-1"
-            self.endpoint_url = "http://localhost:8000"
-            self.dynamo_table_name = "user_mss_template-table"
-            self.dynamo_partition_key = "PK"
-            self.dynamo_sort_key = "SK"
-            self.cloud_front_distribution_domain = "https://d3q9q9q9q9q9q9.cloudfront.net"
-
-        else:
-            self.s3_bucket_name = os.environ.get("S3_BUCKET_NAME")
-            self.region = os.environ.get("REGION")
-            self.endpoint_url = os.environ.get("ENDPOINT_URL")
-            self.dynamo_table_name = os.environ.get("DYNAMO_TABLE_NAME")
-            self.dynamo_partition_key = os.environ.get("DYNAMO_PARTITION_KEY")
-            self.dynamo_sort_key = os.environ.get("DYNAMO_SORT_KEY")
-            self.cloud_front_distribution_domain = os.environ.get("CLOUD_FRONT_DISTRIBUTION_DOMAIN")
+        self.stage = STAGE[os.environ.get("ENV")]
+        self.mongo_uri = os.environ.get("MONGO_URI")
+        self.mongo_db_name = os.environ.get("DB_NAME")
 
     @staticmethod
-    def get_user_repo() -> IUserRepository:
+    def get_alerts_repo() -> IAlertsRepository:
         if Environments.get_envs().stage == STAGE.TEST:
-            from src.shared.infra.repositories.battery_repository_mock import UserRepositoryMock
-            return UserRepositoryMock
+            from src.shared.infra.repositories.alerts_repository_mock import AlertsRepositoryMock
+            return AlertsRepositoryMock
         elif Environments.get_envs().stage in [STAGE.DEV, STAGE.HOMOLOG, STAGE.PROD]:
-            from src.shared.infra.repositories.user_repository_dynamo import UserRepositoryDynamo
-            return UserRepositoryDynamo
+            from src.shared.infra.repositories.mongodb.alerts_repository_mongodb import AlertsRepositoryMongoDB
+            return AlertsRepositoryMongoDB
         else:
             raise Exception("No repository found for this stage")
 
     @staticmethod
-    def get_observability() -> IObservability:
+    def get_battery_repo() -> IBatteryRepository:
         if Environments.get_envs().stage == STAGE.TEST:
-            from src.shared.infra.external.observability.observability_mock import ObservabilityMock
-            return ObservabilityMock
+            from src.shared.infra.repositories.battery_repository_mock import BatteryRepositoryMock
+            return BatteryRepositoryMock
         elif Environments.get_envs().stage in [STAGE.DEV, STAGE.HOMOLOG, STAGE.PROD]:
-            from src.shared.infra.external.observability.observability_aws import ObservabilityAWS
-            return ObservabilityAWS
+            from src.shared.infra.repositories.mongodb.battery_repository_mongodb import BatteryRepositoryMongoDB
+            return BatteryRepositoryMongoDB
         else:
-            raise Exception("No observability class found for this stage")
+            raise Exception("No repository found for this stage")
+
+    @staticmethod
+    def get_measurements_repo() -> IMeasurementsRepository:
+        if Environments.get_envs().stage == STAGE.TEST:
+            from src.shared.infra.repositories.measurements_repository_mock import MeasurementsRepositoryMock
+            return MeasurementsRepositoryMock
+        elif Environments.get_envs().stage in [STAGE.DEV, STAGE.HOMOLOG, STAGE.PROD]:
+            from src.shared.infra.repositories.mongodb.measurements_repository_mongodb import MeasurementsRepositoryMongoDB
+            return MeasurementsRepositoryMongoDB
+        else:
+            raise Exception("No repository found for this stage")
+
+    @staticmethod
+    def get_producers_consumers_repo() -> IProducersConsumersRepository:
+        if Environments.get_envs().stage == STAGE.TEST:
+            from src.shared.infra.repositories.producers_consumers_repository_mock import ProducersConsumersRepositoryMock
+            return ProducersConsumersRepositoryMock
+        elif Environments.get_envs().stage in [STAGE.DEV, STAGE.HOMOLOG, STAGE.PROD]:
+            from src.shared.infra.repositories.mongodb.producers_consumers_repository_mongodb import ProducersConsumersRepositoryMongoDB
+            return ProducersConsumersRepositoryMongoDB
+        else:
+            raise Exception("No repository found for this stage")
+
     @staticmethod
     def get_envs() -> "Environments":
         """
@@ -95,4 +96,3 @@ class Environments:
 
     def __repr__(self):
         return self.__dict__
-
