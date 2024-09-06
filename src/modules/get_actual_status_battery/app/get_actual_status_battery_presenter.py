@@ -1,15 +1,16 @@
-from src.modules.measure_battery.app.measure_battery_controller import MeasureBatteryController
-from src.modules.measure_battery.app.measure_battery_usecase import MeasureBatteryUsecase
+
+from src.modules.get_actual_status_battery.app.get_actual_status_battery_controller import GetActualStatusBatteryController
+from src.modules.get_actual_status_battery.app.get_actual_status_battery_usecase import GetActualStatusBatteryUsecase
 from src.shared.environments import Environments
 from src.shared.helpers.external_interfaces.http_models import HttpRequest, HttpResponse
 from src.shared.infra.repositories.battery_repository_mock import BatteryRepositoryMock
 
 repo = Environments.get_battery_repo()()
-usecase = MeasureBatteryUsecase(repo=repo)
-controller = MeasureBatteryController(usecase=usecase)
+usecase = GetActualStatusBatteryUsecase(repo=repo)
+controller = GetActualStatusBatteryController(usecase=usecase)
 
 
-def measure_battery_presenter(request):
+def get_actual_status_battery_presenter(request):
     request_data = request.body or dict(request.query_params)
     request = HttpRequest(body=dict(request_data))
 

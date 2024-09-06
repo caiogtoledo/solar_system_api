@@ -7,7 +7,7 @@ from src.shared.domain.entities.alert import Alert
 
 class Test_AlertViewModel:
 
-    def test_create_alert_viewmodel(self):
+    def test_get_all_alert_viewmodel(self):
         alert = Alert(
             alert_id="1",
             type="baixa_carga_bateria",
@@ -33,7 +33,7 @@ class Test_AlertViewModel:
 
 class Test_GetAllAlertsViewModel:
 
-    def test_create_get_all_alerts_viewmodel(self):
+    def test_get_all_alerts_viewmodel(self):
         alerts = [
             Alert(
                 alert_id="1",

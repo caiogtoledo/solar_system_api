@@ -1,22 +1,18 @@
-from .measure_consumer_controller import CreateUserController
-from .measure_consumer_usecase import CreateUserUsecase
+from src.modules.measure_consumer.app.measure_consumer_controller import MeasureConsumerController
+from src.modules.measure_consumer.app.measure_consumer_usecase import MeasureConsumerUsecase
 from src.shared.environments import Environments
-from src.shared.helpers.external_interfaces.http_lambda_requests import LambdaHttpRequest, LambdaHttpResponse
+from src.shared.helpers.external_interfaces.http_models import HttpRequest, HttpResponse
+from src.shared.infra.repositories.producers_consumers_repository_mock import ProducersConsumersRepositoryMock
 
-repo = Environments.get_user_repo()()
-usecase = CreateUserUsecase(repo)
-controller = CreateUserController(usecase)
+repo = Environments.get_producers_consumers_repo()()
+usecase = MeasureConsumerUsecase(repo=repo)
+controller = MeasureConsumerController(usecase=usecase)
 
 
-def lambda_handler(event, context):
+def measure_consumer_presenter(request):
+    request_data = request.body or dict(request.query_params)
+    request = HttpRequest(body=dict(request_data))
 
-    from pprint import pprint
+    response = controller(request=request)
 
-    pprint(event)
-
-    httpRequest = LambdaHttpRequest(data=event)
-    response = controller(httpRequest)
-    httpResponse = LambdaHttpResponse(
-        status_code=response.status_code, body=response.body, headers=response.headers)
-
-    return httpResponse.toDict()
+    return HttpResponse(body=response.body, status_code=response.status_code)

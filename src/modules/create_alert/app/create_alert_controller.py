@@ -1,5 +1,5 @@
-from src.modules.create_alert.app.alert_usecase import CreateAlertUsecase
-from src.modules.create_alert.app.alert_viewmodel import AlertViewmodel
+from src.modules.create_alert.app.create_alert_usecase import CreateAlertUsecase
+from src.modules.create_alert.app.create_alert_viewmodel import AlertViewmodel
 from src.shared.helpers.external_interfaces.external_interface import IResponse, IRequest
 from src.shared.helpers.errors.controller_errors import MissingParameters, WrongTypeParameter
 from src.shared.helpers.errors.domain_errors import EntityError

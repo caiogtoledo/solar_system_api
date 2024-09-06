@@ -1,22 +1,18 @@
-from .measure_sensor_controller import CreateUserController
-from .measure_sensor_usecase import CreateUserUsecase
+from src.modules.measure_sensor.app.measure_sensor_controller import MeasureSensorController
+from src.modules.measure_sensor.app.measure_sensor_usecase import MeasureSensorUsecase
 from src.shared.environments import Environments
-from src.shared.helpers.external_interfaces.http_lambda_requests import LambdaHttpRequest, LambdaHttpResponse
+from src.shared.helpers.external_interfaces.http_models import HttpRequest, HttpResponse
+from src.shared.infra.repositories.measurements_repository_mock import MeasurementsRepositoryMock
 
-repo = Environments.get_user_repo()()
-usecase = CreateUserUsecase(repo)
-controller = CreateUserController(usecase)
+repo = Environments.get_measurements_repo()()
+usecase = MeasureSensorUsecase(repo=repo)
+controller = MeasureSensorController(usecase=usecase)
 
 
-def lambda_handler(event, context):
+def measure_sensor_presenter(request):
+    request_data = request.body or dict(request.query_params)
+    request = HttpRequest(body=dict(request_data))
 
-    from pprint import pprint
+    response = controller(request=request)
 
-    pprint(event)
-
-    httpRequest = LambdaHttpRequest(data=event)
-    response = controller(httpRequest)
-    httpResponse = LambdaHttpResponse(
-        status_code=response.status_code, body=response.body, headers=response.headers)
-
-    return httpResponse.toDict()
+    return HttpResponse(body=response.body, status_code=response.status_code)
