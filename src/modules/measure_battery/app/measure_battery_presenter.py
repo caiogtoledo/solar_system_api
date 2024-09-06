@@ -1,9 +1,10 @@
 from src.modules.measure_battery.app.measure_battery_controller import MeasureBatteryController
 from src.modules.measure_battery.app.measure_battery_usecase import MeasureBatteryUsecase
+from src.shared.environments import Environments
 from src.shared.helpers.external_interfaces.http_models import HttpRequest, HttpResponse
 from src.shared.infra.repositories.battery_repository_mock import BatteryRepositoryMock
 
-repo = BatteryRepositoryMock()
+repo = Environments.get_battery_repo()()
 usecase = MeasureBatteryUsecase(repo=repo)
 controller = MeasureBatteryController(usecase=usecase)
 

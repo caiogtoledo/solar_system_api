@@ -1,10 +1,11 @@
 
 from src.modules.get_all_alerts.app.get_all_alerts_controller import GetAllAlertsController
 from src.modules.get_all_alerts.app.get_all_alerts_usecase import GetAllAlertsUsecase
+from src.shared.environments import Environments
 from src.shared.infra.repositories.alerts_repository_mock import AlertsRepositoryMock
 from src.shared.helpers.external_interfaces.http_models import HttpRequest, HttpResponse
 
-repo = AlertsRepositoryMock()
+repo = Environments.get_alerts_repo()()
 usecase = GetAllAlertsUsecase(repo=repo)
 controller = GetAllAlertsController(usecase=usecase)
 
