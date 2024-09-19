@@ -17,7 +17,7 @@ class Test_CreateAlertUsecase:
             type="serverity",
             message="temperature is too high",
             is_resolved=False,
-            timestamp_created_at=int(datetime.datetime.now().timestamp()),
+            timestamp_created_at=int(datetime.datetime.now().timestamp())*1000,
         )
 
         assert repo.alerts[-1] == alert
@@ -46,7 +46,8 @@ class Test_CreateAlertUsecase:
                 type=2,
                 message="temperature",
                 is_resolved=False,
-                timestamp_created_at=int(datetime.datetime.now().timestamp()),
+                timestamp_created_at=int(
+                    datetime.datetime.now().timestamp())*1000,
             )
 
     def test_create_alert_invalid_type(self):

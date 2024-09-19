@@ -12,7 +12,7 @@ class Test_MeasureSolarPanelViewModel:
             instantly=0.5,
             daily=3.7,
             monthly=317.3,
-            timestamp=int(datetime.datetime.now().timestamp()),
+            timestamp=int(datetime.datetime.now().timestamp())*1000,
         )
         userViewmodel = MeasureSolarPanelViewmodel(
             solar_panel=solar_panel_measurement).to_dict()
@@ -22,7 +22,7 @@ class Test_MeasureSolarPanelViewModel:
             'instantly': 0.5,
             'daily': 3.7,
             'monthly': 317.3,
-            'timestamp': int(datetime.datetime.now().timestamp()),
+            'timestamp': int(datetime.datetime.now().timestamp())*1000,
             'message': "the measure was created successfully"
         }
 

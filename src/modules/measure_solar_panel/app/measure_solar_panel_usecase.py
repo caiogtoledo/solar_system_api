@@ -25,29 +25,29 @@ class MeasureSolarPanelUsecase:
             solar_panel_id)
 
         if timestamp is None:
-            timestamp = int(datetime.datetime.now().timestamp())
+            timestamp = int(datetime.datetime.now().timestamp())*1000
 
         if last_measure is not None:
             prev_timestamp = last_measure.timestamp
             daily_accumulated_energy = calculate_energy_accumulated(
                 last_measure.daily,
                 instantly,
-                prev_timestamp,
-                timestamp
+                prev_timestamp/1000,
+                timestamp/1000
             )
             monthly_accumulated_energy = calculate_energy_accumulated(
                 last_measure.monthly,
                 instantly,
-                prev_timestamp,
-                timestamp)
+                prev_timestamp/1000,
+                timestamp/1000)
 
             # Verificar se o dia ou mês mudou para resetar os acumulados
-            if datetime.datetime.fromtimestamp(timestamp).date() != datetime.datetime.fromtimestamp(prev_timestamp).date():
-                daily_accumulated_energy = instantly * ((datetime.datetime.fromtimestamp(timestamp) - datetime.datetime.fromtimestamp(
-                    timestamp).replace(hour=0, minute=0, second=0)).total_seconds() / 3600.0)
-            if datetime.datetime.fromtimestamp(timestamp).month != datetime.datetime.fromtimestamp(prev_timestamp).month:
-                monthly_accumulated_energy = instantly * ((datetime.datetime.fromtimestamp(timestamp) - datetime.datetime.fromtimestamp(
-                    timestamp).replace(day=1, hour=0, minute=0, second=0)).total_seconds() / 3600.0)
+            if datetime.datetime.fromtimestamp(timestamp/1000).date() != datetime.datetime.fromtimestamp(prev_timestamp/1000).date():
+                daily_accumulated_energy = instantly * ((datetime.datetime.fromtimestamp(timestamp/1000) - datetime.datetime.fromtimestamp(
+                    timestamp/1000).replace(hour=0, minute=0, second=0)).total_seconds() / 3600.0)
+            if datetime.datetime.fromtimestamp(timestamp/1000).month != datetime.datetime.fromtimestamp(prev_timestamp/1000).month:
+                monthly_accumulated_energy = instantly * ((datetime.datetime.fromtimestamp(timestamp/1000) - datetime.datetime.fromtimestamp(
+                    timestamp/1000).replace(day=1, hour=0, minute=0, second=0)).total_seconds() / 3600.0)
         else:
             daily_accumulated_energy = instantly
             monthly_accumulated_energy = instantly

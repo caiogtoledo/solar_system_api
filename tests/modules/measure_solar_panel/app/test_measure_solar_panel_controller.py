@@ -14,7 +14,7 @@ class Test_MeasureSolarPanelControler:
         request = HttpRequest(body={
             'solar_panel_id': '1',
             'instantly': 0.5,
-            'timestamp': int(datetime.datetime.now().timestamp()),
+            'timestamp': int(datetime.datetime.now().timestamp())*1000,
         })
 
         response = controller(request=request)
@@ -25,7 +25,7 @@ class Test_MeasureSolarPanelControler:
         assert response.body['timestamp'] == repo.solar_panel_measurements[-1].timestamp
         assert isinstance(response.body['timestamp'], int)
         assert response.body['timestamp'] == int(
-            datetime.datetime.now().timestamp())
+            datetime.datetime.now().timestamp())*1000
         assert isinstance(response.body['daily'], float)
         assert isinstance(response.body['monthly'], float)
         assert response.body['daily'] <= response.body['monthly']
@@ -39,7 +39,7 @@ class Test_MeasureSolarPanelControler:
         request = HttpRequest(body={
             # 'solar_panel_id': '1',
             'instantly': 0.5,
-            'timestamp': int(datetime.datetime.now().timestamp()),
+            'timestamp': int(datetime.datetime.now().timestamp())*1000,
         })
 
         response = controller(request=request)
@@ -55,7 +55,7 @@ class Test_MeasureSolarPanelControler:
         request = HttpRequest(body={
             'solar_panel_id': '1',
             # 'instantly': 0.5,
-            'timestamp': int(datetime.datetime.now().timestamp()),
+            'timestamp': int(datetime.datetime.now().timestamp())*1000,
         })
 
         response = controller(request=request)
@@ -72,7 +72,7 @@ class Test_MeasureSolarPanelControler:
         request = HttpRequest(body={
             'solar_panel_id': '1',
             'instantly': 0.5,
-            # 'timestamp': int(datetime.datetime.now().timestamp()),
+            # 'timestamp': int(datetime.datetime.now().timestamp())*1000,
         })
 
         response = controller(request=request)
@@ -82,7 +82,7 @@ class Test_MeasureSolarPanelControler:
         assert response.body['instantly'] == repo.solar_panel_measurements[-1].instantly
         assert isinstance(response.body['timestamp'], int)
         assert response.body['timestamp'] == int(
-            datetime.datetime.now().timestamp())
+            datetime.datetime.now().timestamp())*1000
         assert isinstance(response.body['daily'], float)
         assert isinstance(response.body['monthly'], float)
         assert response.body['daily'] <= response.body['monthly']

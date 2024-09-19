@@ -14,7 +14,7 @@ class MeasureBatteryUsecase:
     def __call__(self, battery_id: float, soc: float, voltage: float, current: float, temperature: float, timestamp: Optional[int]) -> Battery:
 
         if timestamp is None:
-            timestamp = int(datetime.datetime.now().timestamp())
+            timestamp = int(datetime.datetime.now().timestamp())*1000
 
         measure = Battery(
             battery_id=battery_id,

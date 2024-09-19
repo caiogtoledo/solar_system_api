@@ -20,7 +20,7 @@ class MeasureSensorUsecase:
             raise CreationError("Invalid value")
 
         if timestamp is None:
-            timestamp = int(datetime.datetime.now().timestamp())
+            timestamp = int(datetime.datetime.now().timestamp())*1000
 
         measure = Measurement(
             measurement_id=measurement_id,

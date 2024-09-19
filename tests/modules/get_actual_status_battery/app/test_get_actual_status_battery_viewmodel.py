@@ -15,7 +15,7 @@ class Test_GetActualStatusBatteryViewModel:
             voltage=3.7,
             current=317.3,
             temperature=30.3,
-            timestamp=int(datetime.datetime.now().timestamp()),
+            timestamp=int(datetime.datetime.now().timestamp())*1000,
         )
         userViewmodel = GetActualStatusBatteryViewmodel(
             battery=measurement).to_dict()
@@ -26,7 +26,7 @@ class Test_GetActualStatusBatteryViewModel:
             'voltage': 3.7,
             'current': 317.3,
             'temperature': 30.3,
-            'timestamp': int(datetime.datetime.now().timestamp()),
+            'timestamp': int(datetime.datetime.now().timestamp())*1000,
             'message': f"this is the last status of battery: {test_id}"
         }
 

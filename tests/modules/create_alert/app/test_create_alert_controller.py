@@ -18,7 +18,7 @@ class Test_CreateAlertController:
             'type': "severity",
             'message': 'temperature is too high',
             'is_resolved': False,
-            'timestamp_created_at': int(datetime.datetime.now().timestamp()),
+            'timestamp_created_at': int(datetime.datetime.now().timestamp())*1000,
         })
 
         response = controller(request=request)
@@ -31,7 +31,7 @@ class Test_CreateAlertController:
         assert response.body['timestamp_created_at'] == repo.alerts[-1].timestamp_created_at
         assert isinstance(response.body['timestamp_created_at'], int)
         assert response.body['timestamp_created_at'] == int(
-            datetime.datetime.now().timestamp())
+            datetime.datetime.now().timestamp())*1000
 
     def test_create_alert_controller_missing_measurement_id(self):
         repo = AlertsRepositoryMock()
@@ -43,7 +43,7 @@ class Test_CreateAlertController:
             'type': "severity",
             'message': 'temperature is too high',
             'is_resolved': False,
-            'timestamp_created_at': int(datetime.datetime.now().timestamp()),
+            'timestamp_created_at': int(datetime.datetime.now().timestamp())*1000,
         })
 
         response = controller(request=request)
@@ -61,7 +61,7 @@ class Test_CreateAlertController:
             'type': "severity",
             # 'message': 'temperature is too high',
             'is_resolved': False,
-            'timestamp_created_at': int(datetime.datetime.now().timestamp()),
+            'timestamp_created_at': int(datetime.datetime.now().timestamp())*1000,
         })
 
         response = controller(request=request)
@@ -80,7 +80,7 @@ class Test_CreateAlertController:
             'type': "severity",
             'message': 'temperature is too high',
             'is_resolved': False,
-            # 'timestamp_created_at': int(datetime.datetime.now().timestamp()),
+            # 'timestamp_created_at': int(datetime.datetime.now().timestamp())*1000,
         })
 
         response = controller(request=request)
@@ -93,4 +93,4 @@ class Test_CreateAlertController:
         assert response.body['timestamp_created_at'] == repo.alerts[-1].timestamp_created_at
         assert isinstance(response.body['timestamp_created_at'], int)
         assert response.body['timestamp_created_at'] == int(
-            datetime.datetime.now().timestamp())
+            datetime.datetime.now().timestamp())*1000

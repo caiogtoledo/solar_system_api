@@ -13,7 +13,7 @@ class Test_GetSolarPanelProductionViewModel:
             instantly=0.5,
             daily=3.7,
             monthly=317.3,
-            timestamp=int(datetime.datetime.now().timestamp()),
+            timestamp=int(datetime.datetime.now().timestamp())*1000,
         )
         userViewmodel = GetSolarPanelProductionViewmodel(
             solar_panel=solar_panel_measurement).to_dict()
@@ -23,7 +23,7 @@ class Test_GetSolarPanelProductionViewModel:
             'instantly': 0.5,
             'daily': 3.7,
             'monthly': 317.3,
-            'timestamp': int(datetime.datetime.now().timestamp()),
+            'timestamp': int(datetime.datetime.now().timestamp())*1000,
             'message': f"this is the last measure of the solar panel: {test_id}"
         }
 

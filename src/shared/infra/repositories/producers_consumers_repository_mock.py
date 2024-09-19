@@ -12,19 +12,19 @@ class ProducersConsumersRepositoryMock(IProducersConsumersRepository):
     def __init__(self):
         self.solar_panel_measurements = [
             SolarPanel(solar_panel_id="1", instantly=100.0,
-                       daily=1000.0, monthly=30000.0, timestamp=1643723400),
+                       daily=1000.0, monthly=30000.0, timestamp=1643723400000),
             SolarPanel(solar_panel_id="1", instantly=101.0,
-                       daily=1001.0, monthly=30001.0, timestamp=1643723410),
+                       daily=1001.0, monthly=30001.0, timestamp=1643723410000),
             SolarPanel(solar_panel_id="2", instantly=102.0,
-                       daily=1002.0, monthly=30002.0, timestamp=1643723420),
+                       daily=1002.0, monthly=30002.0, timestamp=1643723420000),
         ]
         self.consumer_measurements = [
             Consumer(consumer_id="1", instantly=50.0, daily=500.0,
-                     monthly=15000.0, timestamp=1643723400),
+                     monthly=15000.0, timestamp=1643723400000),
             Consumer(consumer_id="1", instantly=51.0, daily=501.0,
-                     monthly=15001.0, timestamp=1643723410),
+                     monthly=15001.0, timestamp=1643723410000),
             Consumer(consumer_id="1", instantly=52.0, daily=502.0,
-                     monthly=15002.0, timestamp=1643723420),
+                     monthly=15002.0, timestamp=1643723420000),
         ]
 
     def create_solar_panel_measure(self, measure: SolarPanel) -> None:

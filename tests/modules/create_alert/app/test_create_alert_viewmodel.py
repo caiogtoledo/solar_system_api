@@ -13,7 +13,7 @@ class Test_AlertViewModel:
             type="baixa_carga_bateria",
             message="A carga da bateria está abaixo de 20%",
             is_resolved=False,
-            timestamp_created_at=int(datetime.datetime.now().timestamp()),
+            timestamp_created_at=int(datetime.datetime.now().timestamp())*1000,
             timestamp_updated_at=None
         )
         viewmodel = AlertViewmodel(
@@ -24,7 +24,7 @@ class Test_AlertViewModel:
             'type': "baixa_carga_bateria",
             'message': "A carga da bateria está abaixo de 20%",
             'is_resolved': False,
-            'timestamp_created_at': int(datetime.datetime.now().timestamp()),
+            'timestamp_created_at': int(datetime.datetime.now().timestamp())*1000,
             'timestamp_updated_at': None,
         }
 

@@ -16,7 +16,7 @@ class Test_MeasureConsumerUsecase:
         consumer_measurement = usecase(
             consumer_id="2",
             instantly=0.50,
-            timestamp=int(datetime.datetime.now().timestamp()),
+            timestamp=int(datetime.datetime.now().timestamp())*1000,
         )
 
         assert repo.consumer_measurements[-1] == consumer_measurement

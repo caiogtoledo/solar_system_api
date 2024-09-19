@@ -12,7 +12,7 @@ class Test_MeasureBatteryViewModel:
             voltage=3.7,
             current=0.1,
             temperature=25.0,
-            timestamp=int(datetime.datetime.now().timestamp())
+            timestamp=int(datetime.datetime.now().timestamp())*1000
         )
         userViewmodel = MeasureBatteryViewmodel(
             battery=battery_measurement).to_dict()
@@ -23,7 +23,7 @@ class Test_MeasureBatteryViewModel:
             'voltage': 3.7,
             'current': 0.1,
             'temperature': 25.0,
-            'timestamp': int(datetime.datetime.now().timestamp()),
+            'timestamp': int(datetime.datetime.now().timestamp())*1000,
             'message': "the measure was created successfully"
         }
 

@@ -11,11 +11,11 @@ class BatteryRepositoryMock(IBatteryRepository):
     def __init__(self):
         self.battery_measurements = [
             Battery(battery_id="1", soc=0.50, voltage=0.5, current=0.5,
-                    temperature=30.0, timestamp=int(datetime.datetime.now().timestamp())-2),
+                    temperature=30.0, timestamp=int(datetime.datetime.now().timestamp())*1000-2),
             Battery(battery_id="1", soc=0.51, voltage=0.5, current=0.5,
-                    temperature=30.1, timestamp=int(datetime.datetime.now().timestamp())-1),
+                    temperature=30.1, timestamp=int(datetime.datetime.now().timestamp())*1000-1),
             Battery(battery_id="1", soc=0.52, voltage=0.5, current=0.5,
-                    temperature=30.2, timestamp=int(datetime.datetime.now().timestamp())),
+                    temperature=30.2, timestamp=int(datetime.datetime.now().timestamp())*1000),
         ]
         self.user_counter = 3
 
