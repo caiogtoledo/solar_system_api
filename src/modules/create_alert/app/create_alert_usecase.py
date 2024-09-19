@@ -23,7 +23,8 @@ class CreateAlertUsecase:
             raise CreationError("Invalid message")
 
         if timestamp_created_at is None:
-            timestamp_created_at = int(datetime.datetime.now().timestamp())
+            timestamp_created_at = int(
+                datetime.datetime.now().timestamp())*1000
 
         alert = Alert(
             alert_id=alert_id,

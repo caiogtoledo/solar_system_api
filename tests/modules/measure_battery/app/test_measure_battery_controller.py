@@ -17,7 +17,7 @@ class Test_MeasureBatteryControler:
             'voltage': 3.7,
             'current': 0.1,
             'temperature': 25.0,
-            'timestamp': int(datetime.datetime.now().timestamp())
+            'timestamp': int(datetime.datetime.now().timestamp())*1000
         })
 
         response = controller(request=request)
@@ -42,7 +42,7 @@ class Test_MeasureBatteryControler:
             'voltage': 3.7,
             'current': 0.1,
             'temperature': 25.0,
-            'timestamp': int(datetime.datetime.now().timestamp())
+            'timestamp': int(datetime.datetime.now().timestamp())*1000
         })
 
         response = controller(request=request)
@@ -61,7 +61,7 @@ class Test_MeasureBatteryControler:
             'voltage': 3.7,
             'current': 0.1,
             'temperature': 25.0,
-            'timestamp': int(datetime.datetime.now().timestamp())
+            'timestamp': int(datetime.datetime.now().timestamp())*1000
         })
 
         response = controller(request=request)
@@ -80,7 +80,7 @@ class Test_MeasureBatteryControler:
             # 'voltage': 3.7,
             'current': 0.1,
             'temperature': 25.0,
-            'timestamp': int(datetime.datetime.now().timestamp())
+            'timestamp': int(datetime.datetime.now().timestamp())*1000
         })
 
         response = controller(request=request)
@@ -99,7 +99,7 @@ class Test_MeasureBatteryControler:
             'voltage': 3.7,
             # 'current': 0.1,
             'temperature': 25.0,
-            'timestamp': int(datetime.datetime.now().timestamp())
+            'timestamp': int(datetime.datetime.now().timestamp())*1000
         })
 
         response = controller(request=request)
@@ -118,7 +118,7 @@ class Test_MeasureBatteryControler:
             'voltage': 3.7,
             'current': 0.1,
             # 'temperature': 25.0,
-            'timestamp': int(datetime.datetime.now().timestamp())
+            'timestamp': int(datetime.datetime.now().timestamp())*1000
         })
 
         response = controller(request=request)
@@ -137,7 +137,7 @@ class Test_MeasureBatteryControler:
             'voltage': 3.7,
             'current': 0.1,
             'temperature': 25.0,
-            'timestamp': int(datetime.datetime.now().timestamp())
+            'timestamp': int(datetime.datetime.now().timestamp())*1000
         })
 
         response = controller(request=request)
@@ -156,7 +156,7 @@ class Test_MeasureBatteryControler:
             'voltage': 3.7,
             'current': 0.1,
             'temperature': 25.0,
-            'timestamp': int(datetime.datetime.now().timestamp())
+            'timestamp': int(datetime.datetime.now().timestamp())*1000
         })
 
         response = controller(request=request)
@@ -175,7 +175,7 @@ class Test_MeasureBatteryControler:
             'voltage': "3.7 v",
             'current': 0.1,
             'temperature': 25.0,
-            'timestamp': int(datetime.datetime.now().timestamp())
+            'timestamp': int(datetime.datetime.now().timestamp())*1000
         })
 
         response = controller(request=request)
@@ -194,7 +194,7 @@ class Test_MeasureBatteryControler:
             'voltage': 3.7,
             'current': ["0.1"],
             'temperature': 25.0,
-            'timestamp': int(datetime.datetime.now().timestamp())
+            'timestamp': int(datetime.datetime.now().timestamp())*1000
         })
 
         response = controller(request=request)

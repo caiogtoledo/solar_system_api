@@ -14,7 +14,7 @@ class Test_MeasureConsumerControler:
         request = HttpRequest(body={
             'consumer_id': '1',
             'instantly': 0.5,
-            'timestamp': int(datetime.datetime.now().timestamp()),
+            'timestamp': int(datetime.datetime.now().timestamp())*1000,
         })
 
         response = controller(request=request)
@@ -25,7 +25,7 @@ class Test_MeasureConsumerControler:
         assert response.body['timestamp'] == repo.consumer_measurements[-1].timestamp
         assert isinstance(response.body['timestamp'], int)
         assert response.body['timestamp'] == int(
-            datetime.datetime.now().timestamp())
+            datetime.datetime.now().timestamp())*1000
         assert isinstance(response.body['daily'], float)
         assert isinstance(response.body['monthly'], float)
         assert response.body['daily'] <= response.body['monthly']
@@ -39,7 +39,7 @@ class Test_MeasureConsumerControler:
         request = HttpRequest(body={
             # 'consumer_id': '1',
             'instantly': 0.5,
-            'timestamp': int(datetime.datetime.now().timestamp()),
+            'timestamp': int(datetime.datetime.now().timestamp())*1000,
         })
 
         response = controller(request=request)
@@ -55,7 +55,7 @@ class Test_MeasureConsumerControler:
         request = HttpRequest(body={
             'consumer_id': '1',
             # 'instantly': 0.5,
-            'timestamp': int(datetime.datetime.now().timestamp()),
+            'timestamp': int(datetime.datetime.now().timestamp())*1000,
         })
 
         response = controller(request=request)
@@ -72,7 +72,7 @@ class Test_MeasureConsumerControler:
         request = HttpRequest(body={
             'consumer_id': '1',
             'instantly': 0.5,
-            # 'timestamp': int(datetime.datetime.now().timestamp()),
+            # 'timestamp': int(datetime.datetime.now().timestamp())*1000,
         })
 
         response = controller(request=request)
@@ -82,7 +82,7 @@ class Test_MeasureConsumerControler:
         assert response.body['instantly'] == repo.consumer_measurements[-1].instantly
         assert isinstance(response.body['timestamp'], int)
         assert response.body['timestamp'] == int(
-            datetime.datetime.now().timestamp())
+            datetime.datetime.now().timestamp())*1000
         assert isinstance(response.body['daily'], float)
         assert isinstance(response.body['monthly'], float)
         assert response.body['daily'] <= response.body['monthly']

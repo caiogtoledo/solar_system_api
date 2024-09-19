@@ -18,7 +18,7 @@ class Test_MeasureSensorControler:
             'value': 0.5,
             'type': 'temperature',
             'unit': 'C',
-            'timestamp': int(datetime.datetime.now().timestamp()),
+            'timestamp': int(datetime.datetime.now().timestamp())*1000,
         })
 
         response = controller(request=request)
@@ -29,7 +29,7 @@ class Test_MeasureSensorControler:
         assert response.body['timestamp'] == repo.measurements[-1].timestamp
         assert isinstance(response.body['timestamp'], int)
         assert response.body['timestamp'] == int(
-            datetime.datetime.now().timestamp())
+            datetime.datetime.now().timestamp())*1000
         assert isinstance(response.body['type'], str)
         assert isinstance(response.body['unit'], str)
         assert response.body['message'] == "the measure was created successfully"
@@ -44,7 +44,7 @@ class Test_MeasureSensorControler:
             'value': 0.5,
             'type': 'temperature',
             'unit': 'C',
-            'timestamp': int(datetime.datetime.now().timestamp()),
+            'timestamp': int(datetime.datetime.now().timestamp())*1000,
         })
 
         response = controller(request=request)
@@ -62,7 +62,7 @@ class Test_MeasureSensorControler:
             # 'value': 0.5,
             'type': 'temperature',
             'unit': 'C',
-            'timestamp': int(datetime.datetime.now().timestamp()),
+            'timestamp': int(datetime.datetime.now().timestamp())*1000,
         })
 
         response = controller(request=request)
@@ -81,7 +81,7 @@ class Test_MeasureSensorControler:
             'value': 0.5,
             'type': 'temperature',
             'unit': 'C',
-            # 'timestamp': int(datetime.datetime.now().timestamp()),
+            # 'timestamp': int(datetime.datetime.now().timestamp())*1000,
         })
 
         response = controller(request=request)
@@ -91,7 +91,7 @@ class Test_MeasureSensorControler:
         assert response.body['value'] == repo.measurements[-1].value
         assert isinstance(response.body['timestamp'], int)
         assert response.body['timestamp'] == int(
-            datetime.datetime.now().timestamp())
+            datetime.datetime.now().timestamp())*1000
         assert isinstance(response.body['type'], str)
         assert isinstance(response.body['unit'], str)
 

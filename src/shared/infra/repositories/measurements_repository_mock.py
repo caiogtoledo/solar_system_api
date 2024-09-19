@@ -10,11 +10,11 @@ class MeasurementsRepositoryMock(IMeasurementsRepository):
     def __init__(self):
         self.measurements = [
             Measurement(measurement_id="1", value=100.0,
-                        type="irradiacao_solar", unit="W/m2", timestamp=1643723400),
+                        type="irradiacao_solar", unit="W/m2", timestamp=1643723400000),
             Measurement(measurement_id="1", value=101.0,
-                        type="irradiacao_solar", unit="W/m2", timestamp=1643723410),
+                        type="irradiacao_solar", unit="W/m2", timestamp=1643723410000),
             Measurement(measurement_id="2", value=102.0,
-                        type="irradiacao_solar", unit="W/m2", timestamp=1643723420),
+                        type="irradiacao_solar", unit="W/m2", timestamp=1643723420000),
         ]
 
     def create_measure(self, measure: Measurement) -> None:

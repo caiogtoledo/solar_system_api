@@ -17,7 +17,7 @@ class Test_MeasureSensorUsecase:
             value=0.50,
             type="temperature",
             unit="C",
-            timestamp=int(datetime.datetime.now().timestamp()),
+            timestamp=int(datetime.datetime.now().timestamp())*1000,
         )
 
         assert repo.measurements[-1] == measurement

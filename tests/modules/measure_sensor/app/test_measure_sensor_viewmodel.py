@@ -14,7 +14,7 @@ class Test_MeasureSensorViewModel:
             value=0.5,
             type="irradiacao_solar",
             unit="W/m2",
-            timestamp=int(datetime.datetime.now().timestamp()),
+            timestamp=int(datetime.datetime.now().timestamp())*1000,
         )
         measurementViewmodel = MeasureSensorViewmodel(
             measure=measurement).to_dict()
@@ -24,7 +24,7 @@ class Test_MeasureSensorViewModel:
             'value': 0.5,
             'type': "irradiacao_solar",
             'unit': "W/m2",
-            'timestamp': int(datetime.datetime.now().timestamp()),
+            'timestamp': int(datetime.datetime.now().timestamp())*1000,
             'message': "the measure was created successfully"
         }
 

@@ -18,7 +18,7 @@ class Test_MeasureBatteryUsecase:
             voltage=0.5,
             current=0.5,
             temperature=30.0,
-            timestamp=int(datetime.datetime.now().timestamp())
+            timestamp=int(datetime.datetime.now().timestamp())*1000
         )
 
         assert repo.battery_measurements[-1] == battery_measurement
@@ -39,7 +39,7 @@ class Test_MeasureBatteryUsecase:
         assert repo.battery_measurements[-1] == battery_measurement
         assert repo.battery_measurements[-1].timestamp is not None
         assert repo.battery_measurements[-1].timestamp == int(
-            datetime.datetime.now().timestamp())
+            datetime.datetime.now().timestamp())*1000
 
     def test_create_user_invalid_name(self):
         repo = BatteryRepositoryMock()
@@ -52,5 +52,5 @@ class Test_MeasureBatteryUsecase:
                 voltage=0.5,
                 current=0.5,
                 temperature=30.0,
-                timestamp=int(datetime.datetime.now().timestamp())
+                timestamp=int(datetime.datetime.now().timestamp())*1000
             )

@@ -17,7 +17,7 @@ class Test_MeasureSolarPanelUsecase:
         solar_panel_measurement = usecase(
             solar_panel_id="2",
             instantly=0.50,
-            timestamp=int(datetime.datetime.now().timestamp()),
+            timestamp=int(datetime.datetime.now().timestamp())*1000,
         )
 
         assert repo.solar_panel_measurements[-1] == solar_panel_measurement

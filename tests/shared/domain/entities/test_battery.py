@@ -12,7 +12,7 @@ class Test_Battery:
             voltage=3.7,
             current=0.1,
             temperature=25.0,
-            timestamp=int(datetime.datetime.now().timestamp()),
+            timestamp=int(datetime.datetime.now().timestamp())*1000,
         )
 
         assert type(measure) == Battery
@@ -21,7 +21,8 @@ class Test_Battery:
         assert measure.voltage == 3.7
         assert measure.current == 0.1
         assert measure.temperature == 25.0
-        assert measure.timestamp == int(datetime.datetime.now().timestamp())
+        assert measure.timestamp == int(
+            datetime.datetime.now().timestamp())*1000
 
     def test_battery_id_is_none(self):
         with pytest.raises(EntityError):
@@ -31,7 +32,7 @@ class Test_Battery:
                 voltage=3.7,
                 current=0.1,
                 temperature=25.0,
-                timestamp=int(datetime.datetime.now().timestamp()),
+                timestamp=int(datetime.datetime.now().timestamp())*1000,
             )
 
     def test_battery_id_is_not_str(self):
@@ -42,7 +43,7 @@ class Test_Battery:
                 voltage=3.7,
                 current=0.1,
                 temperature=25.0,
-                timestamp=int(datetime.datetime.now().timestamp()),
+                timestamp=int(datetime.datetime.now().timestamp())*1000,
             )
 
     def test_battery_soc_is_none(self):
@@ -53,7 +54,7 @@ class Test_Battery:
                 voltage=3.7,
                 current=0.1,
                 temperature=25.0,
-                timestamp=int(datetime.datetime.now().timestamp()),
+                timestamp=int(datetime.datetime.now().timestamp())*1000,
             )
 
     def test_battery_soc_is_not_valid(self):
@@ -64,7 +65,7 @@ class Test_Battery:
                 voltage=3.7,
                 current=0.1,
                 temperature=25.0,
-                timestamp=int(datetime.datetime.now().timestamp()),
+                timestamp=int(datetime.datetime.now().timestamp())*1000,
             )
 
     def test_battery_voltage_is_not_valid(self):
@@ -75,7 +76,7 @@ class Test_Battery:
                 voltage="TESTE",
                 current=0.1,
                 temperature=25.0,
-                timestamp=int(datetime.datetime.now().timestamp()),
+                timestamp=int(datetime.datetime.now().timestamp())*1000,
             )
 
     def test_battery_current_is_not_valid(self):
@@ -86,7 +87,7 @@ class Test_Battery:
                 voltage=2,
                 current="TESTE",
                 temperature=25.0,
-                timestamp=int(datetime.datetime.now().timestamp()),
+                timestamp=int(datetime.datetime.now().timestamp())*1000,
             )
 
     def test_battery_temperature_is_not_valid(self):
@@ -97,6 +98,6 @@ class Test_Battery:
                 voltage=2,
                 current=0.1,
                 temperature="TESTE",
-                timestamp=int(datetime.datetime.now().timestamp())
+                timestamp=int(datetime.datetime.now().timestamp())*1000
             )
 # TODO: Implementar teste para o MIN e MAX do Soc
