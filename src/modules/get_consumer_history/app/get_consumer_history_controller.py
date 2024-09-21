@@ -1,5 +1,6 @@
 
 from src.modules.get_consumer_history.app.get_consumer_history_usecase import GetConsumerHistoryUsecase
+from src.modules.get_consumer_history.app.get_consumer_history_viewmodel import GetConsumerHistoryViewmodel
 from src.modules.get_status_battery_history.app.get_battery_status_history_viewmodel import GetBatteryStatusHistoryViewmodel
 from src.shared.domain.entities.consumer import Consumer
 from src.shared.helpers.external_interfaces.external_interface import IResponse, IRequest
@@ -12,7 +13,7 @@ from src.shared.helpers.external_interfaces.http_codes import OK, NotFound, BadR
 class GetConsumerHistoryController:
 
     def __init__(self, usecase: GetConsumerHistoryUsecase):
-        self.GetBatteryStatusHistoryUsecase = usecase
+        self.GetConsumerHistoryUsecase = usecase
 
     def __call__(self, request: IRequest) -> IResponse:
         try:
@@ -25,11 +26,11 @@ class GetConsumerHistoryController:
                 raise WrongTypeParameter(
                     "consumer_id", "str", type(consumer_id))
 
-            measure = self.GetBatteryStatusHistoryUsecase(
+            measure = self.GetConsumerHistoryUsecase(
                 consumer_id=consumer_id,
             )
 
-            viewmodel = GetBatteryStatusHistoryViewmodel(measure)
+            viewmodel = GetConsumerHistoryViewmodel(measure)
 
             return OK(viewmodel.to_dict())
 

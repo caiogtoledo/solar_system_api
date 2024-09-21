@@ -23,7 +23,6 @@ class ConsumerViewmodel:
             'daily': self.daily,
             'monthly': self.monthly,
             'timestamp': self.timestamp,
-            'message': "the measure was created successfully"
         }
 
 
