@@ -22,3 +22,11 @@ class IProducersConsumersRepository(ABC):
     @ abstractmethod
     def get_last_consumer_measure(self, consumer_id: str) -> Optional[Consumer]:
         pass
+
+    @ abstractmethod
+    def get_all_solar_panel_measurements(self, consumer_id: str) -> Optional[List[Consumer]]:
+        pass
+
+    @ abstractmethod
+    def get_all_consumer_measurements(self, consumer_id: str) -> Optional[List[Consumer]]:
+        pass
