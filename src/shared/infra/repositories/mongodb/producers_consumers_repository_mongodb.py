@@ -58,3 +58,25 @@ class ProducersConsumersRepositoryMongoDB(IProducersConsumersRepository):
             last_measurement[0].pop("type", None)
             return Consumer(**last_measurement[0])
         return None
+
+    def get_all_solar_panel_measurements(self, solar_panel_id: str) -> list[SolarPanel]:
+        # Filtra pelo id e pelo type
+        documents = self.collection.find(
+            {"solar_panel_id": solar_panel_id, "type": "solar_panel"}).sort("timestamp", -1)
+        measurements = []
+        for document in documents:
+            document.pop("_id", None)
+            document.pop("type", None)
+            measurements.append(SolarPanel(**document))
+        return measurements
+
+    def get_all_consumer_measurements(self, consumer_id: str) -> list[Consumer]:
+        # Filtra pelo id e pelo type
+        documents = self.collection.find(
+            {"consumer_id": consumer_id, "type": "consumer"}).sort("timestamp", -1)
+        measurements = []
+        for document in documents:
+            document.pop("_id", None)
+            document.pop("type", None)
+            measurements.append(Consumer(**document))
+        return measurements

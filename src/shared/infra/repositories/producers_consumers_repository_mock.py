@@ -50,3 +50,17 @@ class ProducersConsumersRepositoryMock(IProducersConsumersRepository):
         if len(measurements) == 0:
             return None
         return self.consumer_measurements[-1]
+
+    def get_all_solar_panel_measurements(self, solar_panel_id) -> List[SolarPanel]:
+        measurements = []
+        for measure in self.solar_panel_measurements:
+            if measure.solar_panel_id == solar_panel_id:
+                measurements.append(measure)
+        return measurements
+
+    def get_all_consumer_measurements(self, consumer_id) -> List[Consumer]:
+        measurements = []
+        for measure in self.consumer_measurements:
+            if measure.consumer_id == consumer_id:
+                measurements.append(measure)
+        return measurements
