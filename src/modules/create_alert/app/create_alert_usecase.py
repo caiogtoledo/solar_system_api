@@ -2,6 +2,7 @@
 
 import datetime
 from typing import Optional
+import uuid
 from src.shared.domain.entities.alert import Alert
 from src.shared.domain.repositories.alerts_repository_interface import IAlertsRepository
 from src.shared.helpers.errors.usecase_errors import CreationError
@@ -11,10 +12,10 @@ class CreateAlertUsecase:
     def __init__(self, repo: IAlertsRepository):
         self.repo = repo
 
-    def __call__(self, alert_id: str, type: float, message: str, is_resolved: bool, timestamp_created_at: Optional[int]) -> Alert:
+    def __call__(self, alert_id: Optional[str], type: float, message: str, is_resolved: bool, timestamp_created_at: Optional[int]) -> Alert:
         validate = Alert.validate_alert_id(alert_id)
         if not validate:
-            raise CreationError("Invalid alert id")
+            alert_id = str(uuid.uuid4())
         validate = Alert.validate_type(type)
         if not validate:
             raise CreationError("Invalid type")
