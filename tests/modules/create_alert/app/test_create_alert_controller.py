@@ -48,8 +48,15 @@ class Test_CreateAlertController:
 
         response = controller(request=request)
 
-        assert response.status_code == 400
-        assert response.body == "Field alert_id is missing"
+        assert response.status_code == 201
+        assert response.body['alert_id'] == repo.alerts[-1].alert_id
+        assert isinstance(response.body['type'], str)
+        assert isinstance(response.body['message'], str)
+        assert isinstance(response.body['is_resolved'], bool)
+        assert response.body['timestamp_created_at'] == repo.alerts[-1].timestamp_created_at
+        assert isinstance(response.body['timestamp_created_at'], int)
+        assert response.body['timestamp_created_at'] == int(
+            datetime.datetime.now().timestamp())*1000
 
     def test_create_sensor_measure_controller_missing_message(self):
         repo = AlertsRepositoryMock()

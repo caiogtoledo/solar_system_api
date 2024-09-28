@@ -1,5 +1,6 @@
 import abc
 from typing import Optional
+import uuid
 
 from src.shared.helpers.errors.domain_errors import EntityError
 
@@ -61,6 +62,14 @@ class Alert(abc.ABC):
     @staticmethod
     def validate_timestamp(timestamp: float) -> bool:
         return isinstance(timestamp, (int, float))
+
+    @staticmethod
+    def validate_uuid(value: float) -> bool:
+        try:
+            uuid_obj = uuid.UUID(value, version=4)
+        except ValueError:
+            return False
+        return str(uuid_obj) == value
 
     def __repr__(self):
         return (f"Alert(alert_id={self.alert_id}, type={self.type}, "

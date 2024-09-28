@@ -14,8 +14,6 @@ class CreateAlertController:
 
     def __call__(self, request: IRequest) -> IResponse:
         try:
-            if request.data.get('alert_id') is None:
-                raise MissingParameters('alert_id')
             if request.data.get('type') is None:
                 raise MissingParameters('type')
             if request.data.get('message') is None:
