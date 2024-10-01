@@ -10,7 +10,7 @@ usecase = GetProducerHistoryUsecase(repo=repo)
 controller = GetProducerHistoryController(usecase=usecase)
 
 
-def get_consumer_history_presenter(request):
+def get_producer_history_presenter(request):
     request_data = request.body or dict(request.query_params)
     request = HttpRequest(body=dict(request_data))
 
