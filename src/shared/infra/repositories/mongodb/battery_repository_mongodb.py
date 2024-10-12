@@ -4,16 +4,20 @@ from pymongo.errors import ConnectionFailure
 from src.shared.domain.entities.battery import Battery
 from src.shared.domain.repositories.battery_repository_interface import IBatteryRepository
 from src.shared.environments import Environments
+from src.shared.infra.repositories.mongodb.mongodb_connection import MongoDBConnection
 
 
 class BatteryRepositoryMongoDB(IBatteryRepository):
     def __init__(self):
-        print("Iniciando conexão com o MongoDB")
-        self.client = MongoClient(Environments.get_envs().mongo_uri)
-        self.db = self.client[Environments.get_envs().mongo_db_name]
-        DB_NAME = "batteries"
-        self.collection = self.db[DB_NAME]
-        self.validate_connection()
+        # print("Iniciando conexão com o MongoDB")
+        # self.client = MongoClient(Environments.get_envs().mongo_uri)
+        # self.db = self.client[Environments.get_envs().mongo_db_name]
+        # DB_NAME = "batteries"
+        # self.collection = self.db[DB_NAME]
+        # self.validate_connection()
+
+        db_manager = MongoDBConnection()
+        self.collection = db_manager.get_db()["batteries"]
 
     def validate_connection(self):
         try:
