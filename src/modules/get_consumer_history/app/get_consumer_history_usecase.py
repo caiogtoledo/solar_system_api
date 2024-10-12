@@ -17,7 +17,7 @@ class GetConsumerHistoryUsecase:
         if not validate:
             raise NoItemsFound("Invalid consumer id")
 
-        history: Optional[List[Consumer]] = self.repo.get_all_consumer_measurements(
+        history: Optional[List[Consumer]] = self.repo.get_consumer_measurements(
             consumer_id)
 
         if history is None or len(history) == 0:
