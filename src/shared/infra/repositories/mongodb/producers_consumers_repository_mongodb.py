@@ -1,20 +1,17 @@
-from typing import Optional
+from typing import Optional, List
 from pymongo import MongoClient
 from pymongo.errors import ConnectionFailure
 from src.shared.domain.entities.solar_panel import SolarPanel
 from src.shared.domain.entities.consumer import Consumer
 from src.shared.domain.repositories.producers_consumers_repository_interface import IProducersConsumersRepository
 from src.shared.environments import Environments
+from src.shared.infra.repositories.mongodb.mongodb_connection import MongoDBConnection
 
 
 class ProducersConsumersRepositoryMongoDB(IProducersConsumersRepository):
     def __init__(self):
-        print("Iniciando conexão com o MongoDB")
-        self.client = MongoClient(Environments.get_envs().mongo_uri)
-        self.db = self.client[Environments.get_envs().mongo_db_name]
-        DB_NAME = "producers_consumers"
-        self.collection = self.db[DB_NAME]
-        self.validate_connection()
+        db_manager = MongoDBConnection()
+        self.collection = db_manager.get_db()["producers_consumers"]
 
     def validate_connection(self):
         try:
@@ -59,7 +56,7 @@ class ProducersConsumersRepositoryMongoDB(IProducersConsumersRepository):
             return Consumer(**last_measurement[0])
         return None
 
-    def get_all_solar_panel_measurements(self, solar_panel_id: str) -> list[SolarPanel]:
+    def get_solar_panel_measurements(self, solar_panel_id: str) -> List[SolarPanel]:
         # Filtra pelo id e pelo type
         documents = self.collection.find(
             {"solar_panel_id": solar_panel_id, "type": "solar_panel"}).sort("timestamp", -1)
@@ -70,10 +67,39 @@ class ProducersConsumersRepositoryMongoDB(IProducersConsumersRepository):
             measurements.append(SolarPanel(**document))
         return measurements
 
-    def get_all_consumer_measurements(self, consumer_id: str) -> list[Consumer]:
+    def get_all_solar_panels_measurements(self, records: int = None) -> List[SolarPanel]:
+        # Retorna todos os painéis solares ou os últimos 'records' registros
+        query = {"type": "solar_panel"}
+        documents = self.collection.find(query).sort("timestamp", -1)
+        if records:
+            documents = documents.limit(records)
+
+        measurements = []
+        for document in documents:
+            document.pop("_id", None)
+            document.pop("type", None)
+            measurements.append(SolarPanel(**document))
+        return measurements
+
+    def get_consumer_measurements(self, consumer_id: str) -> List[Consumer]:
         # Filtra pelo id e pelo type
         documents = self.collection.find(
             {"consumer_id": consumer_id, "type": "consumer"}).sort("timestamp", -1)
+        measurements = []
+        for document in documents:
+            document.pop("_id", None)
+            document.pop("type", None)
+            measurements.append(Consumer(**document))
+        return measurements
+
+    def get_all_consumers_measurements(self, records: int = None) -> List[Consumer]:
+        # Retorna todos os consumidores ou os últimos 'records' registros
+        query = {"type": "consumer"}
+        documents = self.collection.find(query).sort("timestamp", -1)
+        print(records)
+        if records != None:
+            documents = documents.limit(records)
+
         measurements = []
         for document in documents:
             document.pop("_id", None)

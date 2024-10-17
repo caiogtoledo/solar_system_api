@@ -164,6 +164,10 @@ Clone the repository using template
 
     STAGE = TEST
 
+### Run
+
+    functions-framework --target=YOUR_FUNCTION_NAME
+
 
 ## Contributors 💰🤝💰
 

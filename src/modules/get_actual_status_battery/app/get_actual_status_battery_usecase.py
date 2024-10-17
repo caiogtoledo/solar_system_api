@@ -11,7 +11,7 @@ class GetActualStatusBatteryUsecase:
     def __init__(self, repo: IBatteryRepository):
         self.repo = repo
 
-    def __call__(self, battery_id: float) -> Battery:
+    def __call__(self, battery_id: str) -> Battery:
         validate = Battery.validate_battery_id(battery_id)
         if not validate:
             raise NoItemsFound("Invalid battery id")

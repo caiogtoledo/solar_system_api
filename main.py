@@ -3,6 +3,7 @@ from flask import Flask, request
 from src.modules.create_alert.app.create_alert_presenter import create_alert_presenter
 from src.modules.get_actual_status_battery.app.get_actual_status_battery_presenter import get_actual_status_battery_presenter
 from src.modules.get_all_alerts.app.get_all_alerts_presenter import get_all_alerts_presenter
+from src.modules.get_battery_prediction.app.get_battery_prediction_presenter import get_battery_prediction_presenter
 from src.modules.get_consumer_history.app.get_consumer_history_presenter import get_consumer_history_presenter
 from src.modules.get_producer_history.app.get_producer_history_presenter import get_producer_history_presenter
 from src.modules.get_solar_panel_production.app.get_solar_panel_production_presenter import get_solar_panel_production_presenter
@@ -80,6 +81,11 @@ def get_producer_history():
 @app.route('/get-consumer-history', methods=['POST', 'GET'])
 def get_consumer_history():
     return flask_route(request, get_consumer_history_presenter)
+
+
+@app.route('/get-battery-prediction', methods=['POST', 'GET'])
+def get_battery_prediction():
+    return flask_route(request, get_battery_prediction_presenter)
 
 
 def solar_system_api(request):

@@ -4,16 +4,20 @@ from pymongo.errors import ConnectionFailure
 from src.shared.domain.entities.measurement import Measurement
 from src.shared.domain.repositories.measurements_repository_interface import IMeasurementsRepository
 from src.shared.environments import Environments
+from src.shared.infra.repositories.mongodb.mongodb_connection import MongoDBConnection
 
 
 class MeasurementsRepositoryMongoDB(IMeasurementsRepository):
     def __init__(self):
-        print("Iniciando conexão com o MongoDB")
-        self.client = MongoClient(Environments.get_envs().mongo_uri)
-        self.db = self.client[Environments.get_envs().mongo_db_name]
-        DB_NAME = "measurements"
-        self.collection = self.db[DB_NAME]
-        self.validate_connection()
+        # print("Iniciando conexão com o MongoDB")
+        # self.client = MongoClient(Environments.get_envs().mongo_uri)
+        # self.db = self.client[Environments.get_envs().mongo_db_name]
+        # DB_NAME = "measurements"
+        # self.collection = self.db[DB_NAME]
+        # self.validate_connection()
+
+        db_manager = MongoDBConnection()
+        self.collection = db_manager.get_db()["measurements"]
 
     def validate_connection(self):
         try:

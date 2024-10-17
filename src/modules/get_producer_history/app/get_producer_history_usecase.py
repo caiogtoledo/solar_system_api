@@ -16,7 +16,7 @@ class GetProducerHistoryUsecase:
         if not validate:
             raise NoItemsFound("Invalid producer id")
 
-        history: Optional[List[SolarPanel]] = self.repo.get_all_solar_panel_measurements(
+        history: Optional[List[SolarPanel]] = self.repo.get_solar_panel_measurements(
             producer_id)
 
         if history is None or len(history) == 0:
