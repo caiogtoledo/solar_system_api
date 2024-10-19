@@ -96,7 +96,7 @@ class ProducersConsumersRepositoryMongoDB(IProducersConsumersRepository):
         # Retorna todos os consumidores ou os últimos 'records' registros
         query = {"type": "consumer"}
         documents = self.collection.find(query).sort("timestamp", -1)
-        print(records)
+
         if records != None:
             documents = documents.limit(records)
 
