@@ -1,6 +1,6 @@
 
 
-from typing import List
+from typing import List, Optional
 from datetime import datetime, timedelta
 
 from src.shared.domain.entities.battery import Battery
@@ -85,4 +85,12 @@ class GetBatteryPredictionUsecase:
             )
             battery_projections.append(battery_projection)
 
-        return battery_projections
+        last_measure: Optional[Battery] = self.batteryRepo.get_all_battery_measurements(
+            battery_id)
+
+        if last_measure is None:
+            raise NoItemsFound(": battery status")
+
+        battery_projection_with_all_history = last_measure + battery_projections
+
+        return battery_projection_with_all_history
