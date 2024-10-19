@@ -19,6 +19,6 @@ class GetBatteryPredictionTimeViewmodel:
     def to_dict(self):
         return {
             'battery_id': self.battery_id,
-            'time': f'{self.days} dias, {self.hours} horas e {self.minute} minutos',
+            'time': f'{self.days} dias, {self.hours} horas e {self.minute} minutos \n {'Carregando' if self.charging else 'Consumindo'}',
             'charging': self.charging,
         }
