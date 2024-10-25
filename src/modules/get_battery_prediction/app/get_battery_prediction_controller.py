@@ -32,7 +32,7 @@ class GetBatteryPredictionController:
             battery_prediction = self.GetBatteryPredictionUsecase(
                 battery_id=battery_id,
                 k_records=int(
-                    k_records) if k_records is not None else k_records
+                    k_records) if k_records is not None else 500
             )
 
             viewmodel = GetBatteryPredictionViewmodel(battery_prediction)

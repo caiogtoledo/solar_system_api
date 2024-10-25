@@ -17,6 +17,7 @@ class Test_GetBatteryStatusHistoryUsecase:
         test_id = "1"
         history = usecase(
             battery_id=test_id,
+            k_records=None,
         )
 
         assert isinstance(history, List)
@@ -31,6 +32,7 @@ class Test_GetBatteryStatusHistoryUsecase:
         with pytest.raises(NoItemsFound):
             actual_status = usecase(
                 battery_id=None,
+                k_records=None,
             )
 
     def test_get_battery_status_id_not_exists(self):
@@ -40,4 +42,5 @@ class Test_GetBatteryStatusHistoryUsecase:
         with pytest.raises(NoItemsFound):
             actual_status = usecase(
                 battery_id="test_abc",
+                k_records=None
             )

@@ -11,13 +11,15 @@ class GetBatteryStatusHistoryUsecase:
     def __init__(self, repo: IBatteryRepository):
         self.repo = repo
 
-    def __call__(self, battery_id: float) -> Battery:
+    def __call__(self, battery_id: float,  k_records: Optional[int]) -> Battery:
         validate = Battery.validate_battery_id(battery_id)
         if not validate:
             raise NoItemsFound("Invalid battery id")
 
         last_measure: Optional[Battery] = self.repo.get_all_battery_measurements(
-            battery_id)
+            battery_id,
+            records=k_records
+        )
 
         if last_measure is None:
             raise NoItemsFound(": battery status")
