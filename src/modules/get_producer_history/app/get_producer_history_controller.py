@@ -25,8 +25,12 @@ class GetProducerHistoryController:
                 raise WrongTypeParameter(
                     "producer_id", "str", type(producer_id))
 
+            k_records = request.data.get('k_records')
+
             measure = self.GetProducerHistoryUsecase(
                 producer_id=producer_id,
+                k_records=int(
+                    k_records) if k_records is not None else 500
             )
 
             viewmodel = GetProducerHistoryViewmodel(measure)

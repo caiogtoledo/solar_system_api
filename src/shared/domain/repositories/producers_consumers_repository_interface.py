@@ -24,7 +24,7 @@ class IProducersConsumersRepository(ABC):
         pass
 
     @ abstractmethod
-    def get_solar_panel_measurements(self, solar_panel_id: str) -> Optional[List[Consumer]]:
+    def get_solar_panel_measurements(self, solar_panel_id: str, records: Optional[int]) -> Optional[List[Consumer]]:
         pass
 
     @ abstractmethod
@@ -32,7 +32,7 @@ class IProducersConsumersRepository(ABC):
         pass
 
     @ abstractmethod
-    def get_consumer_measurements(self, consumer_id: str) -> Optional[List[Consumer]]:
+    def get_consumer_measurements(self, consumer_id: str, records: Optional[int]) -> Optional[List[Consumer]]:
         pass
 
     @ abstractmethod

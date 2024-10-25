@@ -11,13 +11,15 @@ class GetProducerHistoryUsecase:
     def __init__(self, repo: IProducersConsumersRepository):
         self.repo = repo
 
-    def __call__(self, producer_id: float) -> List[SolarPanel]:
+    def __call__(self, producer_id: float, k_records: Optional[int]) -> List[SolarPanel]:
         validate = SolarPanel.validate_solar_panel_id(producer_id)
         if not validate:
             raise NoItemsFound("Invalid producer id")
 
         history: Optional[List[SolarPanel]] = self.repo.get_solar_panel_measurements(
-            producer_id)
+            producer_id,
+            records=k_records
+        )
 
         if history is None or len(history) == 0:
             raise NoItemsFound(": producer history")
