@@ -51,11 +51,13 @@ class ProducersConsumersRepositoryMock(IProducersConsumersRepository):
             return None
         return self.consumer_measurements[-1]
 
-    def get_solar_panel_measurements(self, solar_panel_id) -> List[SolarPanel]:
+    def get_solar_panel_measurements(self, solar_panel_id, records) -> List[SolarPanel]:
         measurements = []
         for measure in self.solar_panel_measurements:
             if measure.solar_panel_id == solar_panel_id:
                 measurements.append(measure)
+        if records:
+            return measurements[-records:]
         return measurements
 
     def get_all_solar_panels_measurements(self, records) -> List[SolarPanel]:
@@ -63,11 +65,13 @@ class ProducersConsumersRepositoryMock(IProducersConsumersRepository):
             return self.solar_panel_measurements[-records:]
         return self.solar_panel_measurements
 
-    def get_consumer_measurements(self, consumer_id) -> List[Consumer]:
+    def get_consumer_measurements(self, consumer_id, records) -> List[Consumer]:
         measurements = []
         for measure in self.consumer_measurements:
             if measure.consumer_id == consumer_id:
                 measurements.append(measure)
+        if records:
+            return measurements[-records:]
         return measurements
 
     def get_all_consumers_measurements(self, records) -> List[Consumer]:

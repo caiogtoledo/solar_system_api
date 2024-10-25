@@ -12,13 +12,15 @@ class GetConsumerHistoryUsecase:
     def __init__(self, repo: IProducersConsumersRepository):
         self.repo = repo
 
-    def __call__(self, consumer_id: float) -> List[Consumer]:
+    def __call__(self, consumer_id: float, k_records: Optional[int]) -> List[Consumer]:
         validate = Consumer.validate_consumer_id(consumer_id)
         if not validate:
             raise NoItemsFound("Invalid consumer id")
 
         history: Optional[List[Consumer]] = self.repo.get_consumer_measurements(
-            consumer_id)
+            consumer_id,
+            records=k_records
+        )
 
         if history is None or len(history) == 0:
             raise NoItemsFound(": consumer history")

@@ -56,10 +56,12 @@ class ProducersConsumersRepositoryMongoDB(IProducersConsumersRepository):
             return Consumer(**last_measurement[0])
         return None
 
-    def get_solar_panel_measurements(self, solar_panel_id: str) -> List[SolarPanel]:
+    def get_solar_panel_measurements(self, solar_panel_id: str, records: int = None) -> List[SolarPanel]:
         # Filtra pelo id e pelo type
         documents = self.collection.find(
             {"solar_panel_id": solar_panel_id, "type": "solar_panel"}).sort("timestamp", -1)
+        if records:
+            documents = documents.limit(records)
         measurements = []
         for document in documents:
             document.pop("_id", None)
@@ -81,10 +83,12 @@ class ProducersConsumersRepositoryMongoDB(IProducersConsumersRepository):
             measurements.append(SolarPanel(**document))
         return measurements
 
-    def get_consumer_measurements(self, consumer_id: str) -> List[Consumer]:
+    def get_consumer_measurements(self, consumer_id: str, records: int = None) -> List[Consumer]:
         # Filtra pelo id e pelo type
         documents = self.collection.find(
             {"consumer_id": consumer_id, "type": "consumer"}).sort("timestamp", -1)
+        if records:
+            documents = documents.limit(records)
         measurements = []
         for document in documents:
             document.pop("_id", None)

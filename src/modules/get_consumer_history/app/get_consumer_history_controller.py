@@ -26,8 +26,12 @@ class GetConsumerHistoryController:
                 raise WrongTypeParameter(
                     "consumer_id", "str", type(consumer_id))
 
+            k_records = request.data.get('k_records')
+
             measure = self.GetConsumerHistoryUsecase(
                 consumer_id=consumer_id,
+                k_records=int(
+                    k_records) if k_records is not None else 500
             )
 
             viewmodel = GetConsumerHistoryViewmodel(measure)
