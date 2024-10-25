@@ -86,7 +86,9 @@ class GetBatteryPredictionUsecase:
             battery_projections.append(battery_projection)
 
         last_measure: Optional[Battery] = self.batteryRepo.get_all_battery_measurements(
-            battery_id)
+            battery_id,
+            records=500
+        )
 
         if last_measure is None:
             raise NoItemsFound(": battery status")

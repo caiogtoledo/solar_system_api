@@ -25,8 +25,12 @@ class GetBatteryStatusHistoryController:
                 raise WrongTypeParameter(
                     "battery_id", "str", type(battery_id))
 
+            k_records = request.data.get('k_records')
+
             measure = self.GetBatteryStatusHistoryUsecase(
                 battery_id=battery_id,
+                k_records=int(
+                    k_records) if k_records is not None else 500
             )
 
             viewmodel = GetBatteryStatusHistoryViewmodel(measure)

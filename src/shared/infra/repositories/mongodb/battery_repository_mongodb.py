@@ -31,8 +31,12 @@ class BatteryRepositoryMongoDB(IBatteryRepository):
     def create_measure(self, measure: Battery) -> None:
         self.collection.insert_one(measure.__dict__)
 
-    def get_all_battery_measurements(self, battery_id: str) -> List[Battery]:
-        documents = self.collection.find({"battery_id": battery_id})
+    def get_all_battery_measurements(self, battery_id: str, records: Optional[int]) -> List[Battery]:
+        if records:
+            documents = self.collection.find(
+                {"battery_id": battery_id}).limit(records)
+        else:
+            documents = self.collection.find({"battery_id": battery_id})
         measurements = []
         for document in documents:
             # Remove o campo _id que é gerado automaticamente pelo MongoDB

@@ -29,5 +29,6 @@ class Test_BatteryRepositoryMock:
     def test_get_all_battery_measurements(self):
         repo = BatteryRepositoryMock()
         test_id = "1"
-        battery_measurements = repo.get_all_battery_measurements(test_id)
+        battery_measurements = repo.get_all_battery_measurements(
+            test_id, records=None)
         assert len(battery_measurements) == 3

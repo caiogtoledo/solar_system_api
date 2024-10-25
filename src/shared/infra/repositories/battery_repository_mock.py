@@ -22,13 +22,15 @@ class BatteryRepositoryMock(IBatteryRepository):
     def create_measure(self, new_measurement: Battery) -> None:
         self.battery_measurements.append(new_measurement)
 
-    def get_all_battery_measurements(self, battery_id: str) -> List[Battery]:
+    def get_all_battery_measurements(self, battery_id: str, records: int) -> List[Battery]:
         measurements: List[Battery] = []
         for measure in self.battery_measurements:
             if measure.battery_id == battery_id:
                 measurements.append(measure)
         if len(measurements) == 0:
             return None
+        if records:
+            measurements = measurements[-records:]
         return sorted(measurements, key=lambda bat: bat.timestamp)
 
     def get_last_battery_measurement_by_id(self, battery_id: str) -> Optional[Battery]:
